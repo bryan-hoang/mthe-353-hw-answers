@@ -1,0 +1,40 @@
+\documentclass{mthe353answer}
+
+\lhead{
+  MTHE/STAT 353 - Homework 1, 2020\\
+  \vspace{1em}
+  \underline{\makebox[1.35in][c]{137438691328}}\\
+  Student Number
+}
+
+\begin{document}
+\begin{questions}
+  \question{}
+  \begin{align*}
+    p_{X_1}(x_1) &= \sum_{x_3 = 1}^{\infty}\sum_{x_2 = 1}^{\infty}\; p_{X_1,\ldots,X_n}(x_1,\ldots,x_n)\\
+    &= \sum_{x_3 = 1}^{\infty} \sum_{x_2 = 1}^{\infty}\; \left(\frac{1}{2}\right)^{x_3} \left(1-e^{-x_3}\right)^2 e^{-x_3(x_1+x_2-2)}\\
+    &= \sum_{x_3 = 1}^{\infty} \sum_{x_2 = 1}^{\infty}\; \left(\frac{1}{2}\right)^{x_3} \left(1-e^{-x_3}\right)^2 e^{-x_3(x_1-2)} \left(e^{-x_3}\right)^{x_2}\\
+    &= \sum_{x_3 = 1}^{\infty}\; \left(\frac{1}{2}\right)^{x_3} \left(1-e^{-x_3}\right)^2 e^{-x_3(x_1-2)} \sum_{x_2 = 1}^{\infty}\; \left(e^{-x_3}\right)^{x_2}\\
+    &= \sum_{x_3 = 1}^{\infty}\; \left(\frac{1}{2}\right)^{x_3} \left(1-e^{-x_3}\right)^2 e^{-x_3(x_1-2)} \left(\frac{e^{-x_3}}{1-e^{-x_3}}\right)
+      && \text{\(\because\) \( \left\lvert e^{-x_2} \right\rvert < 1,\ \forall x_2 \in \mathbb{Z}_{>0} \)}\\
+    &= \sum_{x_3 = 1}^{\infty}\; \left(\frac{1}{2}\right)^{x_3} \left(1-e^{-x_3}\right) e^{-x_3x_1} e^{x_3}\\
+    &= \sum_{x_3 = 1}^{\infty}\; \left(\frac{1}{2}\right)^{x_3} \left(e^{-x_1}\right)^{x_3} e^{x_3} - \sum_{x_3 = 1}^{\infty}\; \left(\frac{1}{2}\right)^{x_3} \left(e^{-x_1}\right)^{x_3}\\
+    &= \sum_{x_3 = 1}^{\infty}\; \left(\frac{e}{2e^{x_1}}\right)^{x_3} - \sum_{x_3 = 1}^{\infty}\; \left(\frac{1}{2e^{x_1}}\right)^{x_3}\\
+    &= \frac{\frac{e}{2e^{x_1}}}{1 - \frac{e}{2e^{x_1}}} - \frac{\frac{1}{2e^{x_1}}}{1 - \frac{1}{2e^{x_1}}}
+      && \text{\(\because\) both \( \left\lvert \frac{e}{2e^{x_1}} \right\rvert < 1 \) and }\\
+    & && \text{ \( \left\lvert \frac{1}{2e^{x_1}} \right\rvert < 1 \), \( \forall x_1 \in \mathbb{Z}_{>0} \) }\\
+    &= \frac{e}{2e^{x_1} - e} - \frac{1}{2e^{x_1} - 1}
+  \end{align*}
+  \begin{displaymath}
+    \Rightarrow 
+    \boxed{
+      p_{X_1}(x_1) = 
+      \begin{cases}
+        \frac{e}{2e^{x_1} - e} - \frac{1}{2e^{x_1} - 1}, & \forall x_1 \in \mathbb{Z}_{>0}\\
+        0, & \text{otherwise}
+      \end{cases}
+    }
+  \end{displaymath}
+  \hfill \(\Box\)
+\end{questions}
+\end{document}
