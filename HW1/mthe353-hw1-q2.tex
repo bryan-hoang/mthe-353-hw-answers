@@ -19,7 +19,7 @@
   \end{align*}
   Let's try and convert the integrand of the integral in~\eqref{eq:1} into the 
   form \(e^\frac{-(x_3-\mu)^2}{2\sigma^2}\) so that the integrand can be treated 
-  as a form of a probability distribution function for a Normal(\(\mu,\sigma^2\)) 
+  as a form of a p.fd.f.\ for a Normal(\(\mu,\sigma^2\)) 
   random variable. Mainly, let's rearrange the integrand's exponent, \textbf{by adding 0}:
   \begin{align*}
      &\; \frac{(-3x_3^2+2x_1x_3+2x_2x_3-x_1^2-x_2^2+\frac{2}{3}x_1^2+\frac{2}{3}x_2^2-\frac{2}{3}x_1x_2+)-\frac{2}{3}x_1^2-\frac{2}{3}x_2^2+\frac{2}{3}x_1x_2}{2}\\
@@ -37,6 +37,22 @@
   Then for the marginal pdf of \(X_1\),
   \begin{align*}
     f_{X_1}(x_1) =& \int_{-\infty}^{\infty} f_{X_1,X_2}(x_1,x_2) \,\mathrm{d}x_2\\
+    =& \int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}^2\sqrt{3}}\;e^{-\frac{2x_2^2-2x_1x_2+2x_1^2}{2(3)}} \,\mathrm{d}x_2 \\
+    =& \frac{1}{\sqrt{2\pi}^2\sqrt{3}} \int_{-\infty}^{\infty} e^{-\frac{2x_2^2-2x_1x_2+2x_1^2}{2(3)}} \,\mathrm{d}x_2 \numberthis \label{eq:3}
   \end{align*}
+  Let's do the same thing we did for~\eqref{eq:1} to~\eqref{eq:3}.\ i.e. \textbf{add 0.}
+  \begin{align*}
+     & \frac{(-2x_2^2+2x_1x_2-2x_1^2+\frac{3}{2}x_1^2)-\frac{3}{2}x_1^2}{2(3)}\\
+    =& \frac{-2(x_2^2+2x_2(\frac{1}{2}x_1)+\frac{1}{4}x_1^2)}{2(3)}-\frac{\frac{3}{2}x_1^2}{2(3)}\\
+    =& \frac{-(x_2-\frac{1}{2}x_1)^2}{2\sqrt{\frac{3}{2}}^2}-\frac{1}{4}x_1^2 \numberthis \label{eq:4}
+  \end{align*}
+  \begin{gather*}
+    \text{\eqref{eq:4}} \Rightarrow f_{X_1}(x_1) = \frac{1}{\sqrt{2\pi}^2\sqrt{3}}e^{-\frac{1}{4}x_1^2} 
+      \underbrace{\int_{-\infty}^{\infty} e^{\frac{-(x_2-\frac{1}{2}x_1)^2}{2\sqrt{\frac{3}{2}}^2}} \,\mathrm{d}x_2}_{I}\\
+    \Rightarrow \text{The integrand of \(I\) is related to the p.d.f.\ of a Normal(\(\frac{1}{2}x_1, \frac{3}{2}\)) r.v.}\\
+    \Rightarrow I = \sqrt{2\pi}\sqrt{\frac{3}{2}}\\
+    \Rightarrow \boxed{f_{X_1}(x_1) = \frac{1}{\sqrt{2\pi}\sqrt{2}}e^{-\frac{1}{4}x_1^2},\quad \forall x_1 \in (-\infty,\infty)}\\
+  \end{gather*}
+  \hfill\qed{}
 \end{questions}
 \end{document}
