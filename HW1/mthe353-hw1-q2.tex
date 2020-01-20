@@ -1,0 +1,25 @@
+\documentclass{mthe353answer}
+
+\lhead{
+  MTHE/STAT 353 - Homework 1, 2020\\
+  \vspace{1em}
+  \underline{\makebox[1.35in][c]{137438691328}}\\
+  Student Number
+}
+
+\begin{document}
+\begin{questions}
+  \setcounter{question}{1}
+  \question{}
+  \begin{align*}
+    f_{X_1,X_2}(x_1,x_2) =& \int_{-\infty}^{\infty} f_X(x_1,x_2,x_3) \,\mathrm{d}x_3\\
+    =& \int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}} e^{-\frac{(x_1-x_3)^2}{2}} \frac{1}{\sqrt{2\pi}} e^{-\frac{(x_2-x_3)^2}{2}} \frac{1}{\sqrt{2\pi}} e^{-\frac{x_3^2}{2}} \,\mathrm{d}x_3\\
+    =& \frac{1}{(2\pi)^\frac{3}{2}} \int_{-\infty}^{\infty} e^{\frac{-x_1^2+2x_1x_3-x_3^2}{2}} e^{\frac{-x_2^2+2x_2x_3-x_3^2}{2}} e^{-\frac{x_3^2}{2}} \,\mathrm{d}x_3\\
+    =& \frac{1}{(2\pi)^\frac{3}{2}} \int_{-\infty}^{\infty} e^{\frac{-3x_3^2+2x_1x_3+2x_2x_3-x_1^2-x_2^2}{2}} \,\mathrm{d}x_3 \numberthis \label{eq:1}
+  \end{align*}
+  Let us try and convert the integrand of the integral in~\eqref{eq:1} into the 
+  form \(e^\frac{-(x_3-\mu)^2}{2\sigma^2}\) so that the integrand can be treated 
+  as a form of a probability distribution function for a \textapprox{}Normal(\(\mu,\sigma^2\)) 
+  random variable.
+\end{questions}
+\end{document}

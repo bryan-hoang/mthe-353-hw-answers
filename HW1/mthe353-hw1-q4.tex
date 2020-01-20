@@ -1,0 +1,55 @@
+\documentclass{mthe353answer}
+
+\lhead{
+  MTHE/STAT 353 - Homework 1, 2020\\
+  \vspace{1em}
+  \underline{\makebox[1.35in][c]{137438691328}}\\
+  Student Number
+}
+
+\begin{document}
+\begin{questions}
+  \setcounter{question}{3}
+  \question{}
+  For the random matrix to be singular, we want
+  \begin{align*}
+    \begin{vmatrix}
+      X_1 & 0 & 0\\
+      0&X_2&X_2\\
+      0&X_3&X_2
+    \end{vmatrix} &= 0\\
+    X_1(X_2^2-X_2X_3) &= 0\\
+    X_1X_2(X_2-X_3) &= 0
+  \end{align*}
+  \(\Rightarrow\)We want to find \(P(\{X_1=0\}\cup\{X_2=0\}\cup\{X_2=X_3\})\). Then
+  \begin{align*}
+      &\; P(\{X_1=0\}\cup\{X_2=0\}\cup\{X_2=X_3\})\\
+     =&\; P(X_1=0)+P(X_2=0)+P(X_2=X_3)-P(\{X_1=0\}\cup\{X_2=0\})\\
+      &-P(\{X_1=0\}\cup\{X_2=X_3\})-P(\{X_2=0\}\cup\{X_2=X_3\})\\
+     =&\; P(X_1=0)+P(X_2=0)+P(X_2=X_3)\\
+      &-P(X_1=0)P(X_2=0)-P(X_1=0)P(X_2=X_3)-0 && \because\; P(X_3)=0 \text{ for a}\\
+      & &&\qquad \text{geometric r.v.}
+  \end{align*}
+  Finding each of the individual probabilities:
+  \begin{displaymath}
+    P(X_1=0)=P(X_2=0)=\frac{\theta^0e^{-\theta}}{0!}=e^{-\theta}\quad \because X_1 \text{ and } X_2 \text{ are both distributed as Poisson(\(\theta\))}
+  \end{displaymath}
+  \begin{align*}
+    P(X_2=X_3) =& \sum_{n=0}^{\infty}\; P(X_2=n,X_3=n)\\
+    =& \sum_{n=0}^{\infty}\; P(X_2=n)P(X_3=n) && \because X_2 \text{ and } X_3 \text{ are independent}\\
+    =& \sum_{n=1}^{\infty}\; P(X_2=n)P(X_3=n) && \because P(X_3=0)=0\\
+    =& \sum_{n=1}^{\infty}\; \frac{\theta^n{}e^{-\theta}}{n!}=e^{-\theta}\left(\frac{1}{2}\right)^n\\
+    =&\; e^{-\theta} \sum_{n=1}^{\infty}\; \frac{\left(\frac{\theta}{2}\right)^n}{n!}\\
+    =&\; e^{-\theta}\left(e^{\frac{\theta}{2}}-1\right)\\
+    =&\; e^{-\frac{\theta}{2}}-e^{-\theta}
+  \end{align*}
+  Then the probability that the random matrix is singular is
+  \begin{align*}
+    =& \; P(X_1=0)+P(X_2=0)+P(X_2=X_3)-P(X_1=0)P(X_2=0)\\
+     &-P(X_1=0)P(X_2=X_3)\\
+    =& \; e^{-\theta}+e^{-\theta}+e^{-\frac{\theta}{2}}-e^{-\theta}-e^{-2\theta}-e^{-\frac{3\theta}{2}}+e^{-2\theta}\\
+    \alignedbox{=}{e^{-\frac{\theta}{2}}+e^{-\theta}-e^{-\frac{3\theta}{2}}}
+  \end{align*}
+  \hfill{}\(\Box{}\)
+\end{questions}
+\end{document}
