@@ -1,0 +1,37 @@
+\documentclass{mthe353answer}
+
+\lhead{
+  MTHE/STAT 353 - Homework 1, 2020\\
+  \vspace{1em}
+  \underline{\makebox[1.35in][c]{20053722}}\\
+  Student Number
+}
+
+\begin{document}
+\begin{questions}
+  \setcounter{question}{2}
+  \question{}
+  We can model the problem as a Multivariate Hypergeometric distribution. To use
+  the second version of the distribution, let \(X_1\) and \(X_2\) be of type
+  ``other''. Then the probability density function of \(X_3\) is
+  \begin{align*}
+    p_{X_3}(x_3) =&
+    \begin{cases}
+      \frac{\binom{10}{x_3}\binom{14-10}{7-x_3}}{\binom{14}{7}}, & \text{if } x_1 \in \{x\in\mathbb{Z}_{\ge0}|\text{max}(0, 7-(14-10))\le x\le 7\}\\
+      0, & \text{otherwise}
+    \end{cases}\\
+    =&
+    \begin{cases}
+      \frac{\binom{10}{x_3}\binom{4}{7-x_3}}{\binom{14}{7}}, & \text{if } x_1 \in \{3,4,5,6,7\}\\
+      0, & \text{otherwise}
+    \end{cases}
+  \end{align*}
+  Then
+  \begin{align*}
+    E[X_3] =& \sum_{x_3=3}^{7} x_3\;p_{X_3}(x_3)\\
+    =& \sum_{x_3=3}^{7} x_3\frac{\binom{10}{x_3}\binom{4}{7-x_3}}{\binom{14}{7}}\\
+    \alignedbox{=\;}{5}\quad \text{(using a calculator)}
+  \end{align*}
+  \hfill\qed{}
+\end{questions}
+\end{document}

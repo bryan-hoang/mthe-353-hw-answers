@@ -1,0 +1,121 @@
+\documentclass{mthe353answer}
+
+\lhead{
+  MTHE/STAT 353 - Homework 1, 2020\\
+  \vspace{1em}
+  \underline{\makebox[1.35in][c]{20053722}}\\
+  Student Number
+}
+
+\begin{document}
+\begin{questions}
+  \setcounter{question}{4}
+  \question{}
+  Since \(X_1,\ldots,X_n\) are independent random variables, then the joint
+  probability distribution function of the random variables is 
+  \begin{align*}
+    f_{X_1,\ldots,X_n}(x_1,\ldots,x_n) =& f_1(x_1)\ldots f_n(x_n)\\
+    =&
+    \begin{cases}
+      \prod_{k=1}^{n} ke^{-kx_k}, & \text{if } (x_1,\dots,x_n) \in \mathbb{R}_{\ge0}^{n}\\
+      0, & \text{otherwise}
+    \end{cases}
+  \end{align*}
+  To compute \(P(\text{min}(X_1,\ldots,X_n)=X_n)\), we need to integrate the 
+  joint pdf over the ``region'' where \(X_1 \ge X_n\), and \(X_2 \ge X_n\),
+  \ldots, and \(X_{n-1} \ge X_n\). Hence
+  \begin{align*}
+    & P(\text{min}(X_1,\ldots,X_n)=X_n)\\
+    =& \int_{0}^{\infty}\int_{x_n}^{\infty}\ldots\int_{x_n}^{\infty} f_{X_1,\ldots,X_n}(x_1,\ldots,x_n)
+      \, \mathrm{d}x_1\ldots \, \mathrm{d}x_{n-1} \, \mathrm{d}x_n\\
+    =& \int_{0}^{\infty}\int_{x_n}^{\infty}\ldots\int_{x_n}^{\infty} 
+      \prod_{k=1}^{n} ke^{-kx_k}
+      \, \mathrm{d}x_1\ldots \, \mathrm{d}x_{n-1} \, \mathrm{d}x_n\\
+    =& \int_{0}^{\infty} ne^{-nx_n} \int_{x_n}^{\infty} (n-1)e^{-(n-1)x_{n-1}} \, \mathrm{d}x_{n-1} \ldots \int_{x_n}^{\infty} e^{-x_1} 
+      \, \mathrm{d}x_1 \, \mathrm{d}x_n\\
+    =& \int_{0}^{\infty} n\left(e^{-nx_n}\right) \left(e^{-(n-1)x_n}\right) \ldots \left(e^{-x_n}\right) \, \mathrm{d}x_n\\
+    =& \int_{0}^{\infty} n \prod_{k=1}^{n} e^{-kx_n} \, \mathrm{d}x_n\\
+    =& \int_{0}^{\infty} n e^{-x_n\sum_{k=1}^{n}k} \, \mathrm{d}x_n\\
+    =& \int_{0}^{\infty} n e^{-\frac{n(n+1)}{2}x_n} \, \mathrm{d}x_n\\
+    \intertext{\(\because\) the sum of n natural numbers is a triangular number. We then have}
+    =& -\frac{2}{n+1}\left[e^{-\frac{n(n+1)}{2}x_n}\right]_{x_n=0}^{x_n=\infty}\\
+    \Rightarrow &\; \boxed{P(\text{min}(X_1,\ldots,X_n)=X_n) = \frac{2}{n+1},\quad \forall n \in \mathbb{Z}_{>0} }
+  \end{align*}
+
+  Computing \(P(X_n<X_{n-1}<\cdots<X_2<X_1)\) is done as follows:
+  \begin{align*}
+    & P(X_n<X_{n-1}<\cdots<X_2<X_1)\\
+    =& \int_{0}^{\infty} \int_{x_n}^{\infty} \int_{x_{n-1}}^{\infty} \dots \int_{x_{3}}^{\infty} \int_{x_{2}}^{\infty} 
+      f_{X_1,\dots,X_n}(x_1,\dots,x_n)
+      \, \mathrm{d}x_1 \, \mathrm{d}x_2\dots \, \mathrm{d}x_{n-2} \, \mathrm{d}x_{n-1} \, \mathrm{d}x_n\\
+    =& \int_{0}^{\infty} \int_{x_n}^{\infty} \int_{x_{n-1}}^{\infty} \dots \int_{x_{3}}^{\infty} \int_{x_{2}}^{\infty} 
+      \;\prod_{k=1}^{n} ke^{-kx_k}\;
+      \, \mathrm{d}x_1 \, \mathrm{d}x_2\dots \, \mathrm{d}x_{n-2} \, \mathrm{d}x_{n-1} \, \mathrm{d}x_n\\
+    =& \int_{0}^{\infty} ne^{-nx_n} \int_{x_n}^{\infty} (n-1)e^{-(n-1)x_{n-1}} \int_{x_{n-1}}^{\infty} (n-2)e^{-(n-2)x_{n-2}}\\
+     & \dots \int_{x_{3}}^{\infty} 2e^{-2x_2} \underbrace{\int_{x_{2}}^{\infty} 
+     e^{-x_1}
+     \, \mathrm{d}x_1}_{\phi_1} \, \mathrm{d}x_2\dots \, \mathrm{d}x_{n-2} \, \mathrm{d}x_{n-1} \, \mathrm{d}x_n \numberthis \label{eq:1}
+  \end{align*}
+  To evaluate this \textbf{beautiful integral}, let \(\phi_1\) be defined as above, and 
+  let
+  \[
+    \phi_k = \int_{x_{k+1}}^{\infty}f_k(x_k)\phi_{k-1} \, \mathrm{d}x_k,\quad \forall k \in \mathbb{Z}_{>1}
+  \]
+  Then \((\phi_k)_{k \in \mathbb{Z}_{>0}}\)
+  defines a sequence of the inner integrals of~\eqref{eq:1}.
+  Let's try and find an explicit formula for each element in the sequence and use
+  that to calculate the integral. Firstly let's find a general form for each element.
+  For the first element, We have
+  \begin{equation}
+    \phi_1 = \int_{x_{2}}^{\infty} e^{-x_1} \, \mathrm{d}x_1 = e^{-x_2} \label{eq:2}
+  \end{equation}
+  \begin{claim}
+    \(\forall k \in \mathbb{Z}_{>1},\; \phi_k\) is of the form \(\alpha_k e^{-\beta_k x_{k+1}}\) for some constants \(\alpha_k\) and \(\beta_k\).
+  \end{claim}
+  \begin{proof} (Induction)\\
+    Base case:\\
+    For \(k = 1\), from~\eqref{eq:2}, we see that \(\alpha_1=\beta_1=1\).\\
+    Inductive step:\\
+    For \(k \ge 1\), assume the claim holds. Then
+    \begin{align*}
+      \phi_{k+1} =& \int_{x_{k+2}}^{\infty} f_{k+1}(x_{k+1}) \phi_k \, \mathrm{d}x_{k+1}\\
+      =& \int_{x_{k+2}}^{\infty} (k+1)e^{-(k+1)x_{k+1}} \alpha_k e^{-\beta_k x_{k+1}} \, \mathrm{d}x_{x+1}\\
+      =&\; \alpha_k (k+1) \int_{x_{k+2}}^{\infty} e^{-(\beta_k+k+1)x_{k+1}} \, \mathrm{d}x_{x+1}\\
+      =&\; \alpha_k (k+1) \frac{1}{\beta_k+k+1} e^{-(\beta_k+k+1)x_{k+2}}
+    \end{align*}
+    Let \(\alpha_{k+1}=\alpha_k (k+1) \frac{1}{\beta_k+k+1}\) and 
+    \(\beta_{k+1}=\beta_k+k+1\). Then \(\phi_k\) is of the form 
+    \(\alpha_{k+1}e^{-\beta_{k+1}x_{(k+1)+1}}\).
+
+    Since the base case and the inductive step both hold, the claim must be true
+    for all positive integers.
+  \end{proof}
+  The proof above provides recursive formulas for \(\alpha_k\) and \(\beta_k\)
+  (where \(\alpha_1 = \beta_1 = 1\)), that is \(\forall k \in \mathbb{Z}_{>1}\),
+  \begin{align*}
+    \beta_k =&\; \beta_{k-1} + k & \alpha_k =&\; \alpha_{k-1} \frac{1}{\beta_{k-1} + k}\\
+             &                    &          =&\; \alpha_{k-1} \frac{1}{\beta_k}
+  \end{align*}
+  Now we can solve for the for the explicit formula's of the coefficients. For \(\beta_k\),
+  \begin{align*}
+    \beta_k =& \left(\sum_{i=1}^{k-1}i\right)+k\\
+    =& \sum_{i=1}^{k}i\\
+    =&\; \frac{k(k+1)}{2}\\
+    \intertext{For \(\alpha_k\),}
+    \alpha_k =&\; \alpha_{k-1}\frac{k}{\frac{k(k+1)}{2}}\\
+    =&\; \alpha_{k-1} \frac{2}{k+1}\\
+    =&\left(\prod_{i=1}^{k-1}\frac{2}{i+1}\right)\frac{2}{k+1}\\
+    =& \prod_{i=1}^{k} \frac{2}{i+1}\\
+    =&\; \frac{2^k}{(k+1)!}
+  \end{align*}
+  Now that we know what each term in the sequence \((\phi_k)_{k \in \mathbb{Z}_{>0}}\)
+  looks like, we can evaluate~\eqref{eq:1} using the \(k = n\)
+  term of the sequence, and letting \(x_n = 0\), since the lower bound of the
+  outermost integral is 0. Then
+  \begin{align*}
+    P(X_n<X_{n-1}<\cdots<X_2<X_1) =& \left.\phi_{k}\right|_{x_n=0} \, \mathrm{d}x_n\\
+    =&\; \frac{2^{n}}{(n+1)!} e^{-\frac{n(n+1)}{2}(0)}\\
+    \alignedbox{=}{\frac{2^{n}}{(n+1)!},\quad \forall n \in \mathbb{Z}_{>1}}
+  \end{align*}
+\end{questions}
+\end{document}
