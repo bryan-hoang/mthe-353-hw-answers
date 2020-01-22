@@ -3,7 +3,7 @@
 \lhead{
   MTHE/STAT 353 - Homework 1, 2020\\
   \vspace{1em}
-  \underline{\makebox[1.35in][c]{137438691328}}\\
+  \underline{\makebox[1.35in][c]{20053722}}\\
   Student Number
 }
 
@@ -28,8 +28,8 @@
       &-P(\{X_1=0\}\cap\{X_2=X_3\})-P(\{X_2=0\}\cap\{X_2=X_3\})\\
       &+P(\{X_1=0\}\cap\{X_2=0\}\cap\{X_2=X_3\})\\
      =&\; P(X_1=0)+P(X_2=0)+P(X_2=X_3)\\
-      &-P(X_1=0)P(X_2=0)-P(X_1=0)P(X_2=X_3)-0-0 && \because\; P(X_3)=0 \text{ for a}\\
-      & &&\qquad \text{geometric r.v.}
+      &-P(X_1=0)P(X_2=0)-P(X_1=0)P(X_2=X_3)-0-0\\
+      & \because\; \{X_2=0\}\cap\{X_2=X_3\}=\emptyset\ \text{ as \(X_3\) is a geometric r.v.}
   \end{align*}
   Finding each of the individual probabilities:
   \begin{displaymath}
@@ -51,6 +51,6 @@
     =& \; e^{-\theta}+e^{-\theta}+e^{-\frac{\theta}{2}}-e^{-\theta}-e^{-2\theta}-e^{-\frac{3\theta}{2}}+e^{-2\theta}\\
     \alignedbox{=}{e^{-\frac{\theta}{2}}+e^{-\theta}-e^{-\frac{3\theta}{2}}}
   \end{align*}
-  \hfill{}\(\Box{}\)
+  \hfill\qed{}
 \end{questions}
 \end{document}
