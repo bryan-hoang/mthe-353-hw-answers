@@ -1,0 +1,81 @@
+\documentclass{mthe353answer}
+
+\lhead{
+  MTHE/STAT 353 - Homework 2, 2020\\
+  \vspace{1em}
+  \underline{\makebox[1.35in][c]{20053722}}\\
+  Student Number
+}
+
+\begin{document}
+  \begin{questions}
+    \question{}
+    \begin{proof}
+      Let \(X_1, \dots, X_n\) be random variables. Suppose that for all real
+      valued functions \(g_1, \dots, g_n\),
+      \begin{equation} \label{eq:assumption}
+        E[g_1(X_1) \dots g_n(X_n)] = E[g_1(X_1)] \dots E[g_n(X_n)]
+      \end{equation}
+      There are two cases where the expectations will exist.
+      \begin{case}
+        If \(X_1, \dots, X_n\) are all jointly discrete random variables, then let
+        \(p_X(x_1, \dots, x_n)\) be their joint pmf and for
+        \(i \in \{1, \dots, n\}\), let \(p_i(x_i),\; \) be the marginal pmf for
+        \(X_i\). Without loss of generality, define \(g_1, \dots, g_n\) by
+        \begin{equation*}
+          g_i(x_i) =
+          \begin{cases}
+            1, & \text{if } x_i = a_i\\
+            0, & \text{otherwise}
+          \end{cases}
+          \quad \text{for some } a_i \in \mathbb{R},\; \forall i \in \{1, \dots, n\}
+        \end{equation*}
+        Then the LHS of~\eqref{eq:assumption} becomes
+        \begin{align*}
+          E[g_1(X_1) \dots g_n(X_n)] =& \sum_{x} g_1(x_1) \dots g_n(x_n) p_X(x_1, \dots, x_n) && \text{by LOTUS}\\
+          =&\; P(X_1 = a_1, \dots, X_n = a_n)
+          \shortintertext{\(\because\) of how \(g_i,\; i \in \{1, \dots, n\}\), is defined as a pseudo indicator function.}
+          \intertext{The RHS of~\eqref{eq:assumption} is}
+          E[g_1(X_1)] \dots E[g_n(X_n)] =& \sum_{x_1} g_1(x_1)p_1(x_1) \dots \sum_{x_n} g_n(x_n)p_n(x_n) && \text{by LOTUS}\\
+          =&\; P(X_1 = a_1) \dots P(X_n = a_n)
+          \shortintertext{\(\because\) of how \(g_i,\; i \in \{1, \dots, n\}\), is defined as a pseudo indicator function.}
+        \end{align*}
+        We now have that
+        \begin{equation*}
+          P(X_1 = a_1, \dots, X_n = a_n) = P(X_1 = a_1) \dots P(X_n = a_n), \quad \forall a_1, \dots, a_n \in \mathbb{R}
+        \end{equation*}
+        Thus, \(X_1, \dots, X_n\) are independent in the discrete case.
+      \end{case}
+      \begin{case}
+        If \(X_1, \dots, X_n\) are all jointly continuous random variables, then
+        let \(f_X(x_1, \dots, x_n)\) be their joint pdf and for
+        \(i \in \{1, \dots, n\}\), let \(f_{X_i}(x_i),\; \) be the marginal pdf for
+        \(X_i\). Without loss of generality, define \(g_1, \dots, g_n\) to be
+        the indicator functions for arbitrary sets \(A_1, \dots, A_n \subset \mathbb{R}\),
+        respectively. That is, for \(i \in \{1, \dots, n\}\),
+        \begin{equation*}
+          g_i(x_i) =
+          \begin{cases}
+            1, & \text{if } x_i \in A_i\\
+            0, & \text{otherwise}
+          \end{cases}
+        \end{equation*}
+        Then the LHS of \eqref{eq:assumption} becomes
+        \begin{align*}
+          E[g_1(X_1) \dots g_n(X_n)] =& \int_{\mathbb{R}^n} g_1(x_1) \dots g_n(x_n) f_X(x_1, \dots, x_n) \, \mathrm{d}x_1 \dots \mathrm{d}x_n && \text{by LOTUS}\\
+          =& \int_{A_1, \dots, A_n} f_X(x_1, \dots, x_n) \, \mathrm{d}x_1 \dots \mathrm{d}x_n\\
+          =&\; P(X_1 \in A_1, \dots, X_n \in A_n)
+          \intertext{The RHS of~\eqref{eq:assumption} is}
+          E[g_1(X_1)] \dots E[g_n(X_n)] =& \int_{\mathbb{R}} g_1(x_1)f_{X_1}(x_1) \, \mathrm{d}x_1\; \dots \int_{\mathbb{R}} g_n(x_n)f_{X_n}(x_n) \, \mathrm{d}x_n && \text{by LOTUS}\\
+          =& \int_{A_1} f_{X_1}(x_1) \, \mathrm{d}x_1\; \dots \int_{A_n} f_{X_n}(x_n) \, \mathrm{d}x_n\\
+          =&\; P(X_1 \in A_1) \dots P(X_n \in A_n)
+        \end{align*}
+        We have that
+        \begin{equation*}
+          P(X_1 \in A_1, \dots, X_n \in A_n) = P(X_1 \in A_1) \dots P(X_n \in A_n), \quad \forall A_1, \dots, A_n \subset \mathbb{R}
+        \end{equation*}
+        Thus, \(X_1, \dots, X_n\) are independent in both cases.\qedhere
+      \end{case}
+    \end{proof}
+  \end{questions}
+\end{document}
