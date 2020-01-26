@@ -14,7 +14,7 @@
   Since \(X_1,\ldots,X_n\) are independent random variables, then the joint
   probability distribution function of the random variables is 
   \begin{align*}
-    f_{X_1,\ldots,X_n}(x_1,\ldots,x_n) =& f_1(x_1)\ldots f_n(x_n)\\
+    f_{X_1,\ldots,X_n}(x_1,\ldots,x_n) =&; f_1(x_1)\ldots f_n(x_n)\\
     =&
     \begin{cases}
       \prod_{k=1}^{n} ke^{-kx_k}, & \text{if } (x_1,\dots,x_n) \in \mathbb{R}_{\ge0}^{n}\\
@@ -113,9 +113,9 @@
   term of the sequence, and letting \(x_n = 0\), since the lower bound of the
   outermost integral is 0. Then
   \begin{align*}
-    P(X_n<X_{n-1}<\cdots<X_2<X_1) =& \left.\phi_{k}\right|_{x_n=0} \, \mathrm{d}x_n\\
+    P(X_n<X_{n-1}<\cdots<X_2<X_1) =& \left.\phi_{k}\right|_{x_n=0}\\
     =&\; \frac{2^{n}}{(n+1)!} e^{-\frac{n(n+1)}{2}(0)}\\
-    \alignedbox{=}{\frac{2^{n}}{(n+1)!},\quad \forall n \in \mathbb{Z}_{>1}}
+    \alignedbox{=}{\frac{2^{n}}{(n+1)!},\quad \forall n \in \mathbb{Z}_{>0}}
   \end{align*}
 \end{questions}
 \end{document}
