@@ -12,13 +12,99 @@
     \setcounter{question}{2}
     \question{}\
     \begin{subparts}
+
       \subpart{}
       Finding the joint pmf of \((X_1, X_2, X_3, X_4),\; p(x_1, x_2, x_3, x_4)\).
+
+      \begin{note}
+        The majority of the number crunching discussed here will be done in
+        part~\ref{subpart:pmf} below.
+      \end{note}
+      Now, the first thing to observe is that the total number of possible
+      arrangements for the placement of the balls in the boxes is \(4! = 24\).
+      We can then think about the situation as a combinatorial problem, where
+      the probability that a given configuration of fixed points occur is equal
+      to the number of permutations which satisfy the fixed point condition
+      divided by the total number of permutations possible. The notion of a
+      \textbf{derangement} appears during some of the calculations in
+      part~\ref{subpart:pmf}.
+
+      The support of the joint pmf can be characterized as
+      \begin{equation*}
+        \supp{} (p) = \{(x_1, x_2, x_3, x_4) \in \mathbb{Z}^n \mid
+          x_1 + x_2 + x_3 + x_4 = k,\; k \in \{0, 1, 2, 4\}\}
+      \end{equation*}
+      which contains 12 points.
+
+      The calculations for the joint pmf at \(k = 0\) and \(k = 4\) are seen in part~\ref{subpart:pmf},
+      while the values for that pmf at \(k = 1\) and \(k = 2\) were obtained by
+      dividing the pmf of \(X\), \(p_X\), at 1 and 2 by the corresponding number of points
+      in the support of \(p\). It then follows that the joint pmf is given by
+      \begin{equation*}
+        \boxed{
+          p(x_1, x_2, x_3, x_4) = \left\{
+          \begin{aligned}
+            &\frac{9}{24}, & \text{if } x_1 + x_2 + x_3 + x_4 = 0 && \text{(1 point)}\\
+            &\frac{1}{12}, & \text{if } x_1 + x_2 + x_3 + x_4 = 1 && \text{(4 points)}\\
+            &\frac{1}{24},  & \text{if } x_1 + x_2 + x_3 + x_4 = 2 && \text{(6 points)}\\
+            &\frac{1}{24}, & \text{if } x_1 + x_2 + x_3 + x_4 = 4 && \text{(1 point)}\\
+            &0,            & \text{otherwise}                     && \text{(12 points total)}
+          \end{aligned}
+          \right.
+        }
+      \end{equation*}
+
       \subpart{}
+      \label{subpart:pmf}
       Finding the pmf of \(X,\; p_X(x)\), where \(X\) can be interpreted as the
       number of balls placed into their corresponding box.
+
+      The support of \(p_X\) is the set \(\{0, 1, 2, 3, 4\}\). Let's calculate
+      \(p_X(x)\) for \(x \in \{0, 1, 2, 4\}\). 3 is not a part of the support
+      since it it is impossible to have 3 of the balls belong to their
+      corresponding box and for the fourth one to not belong to its box.
+      \begin{align*}
+        \shortintertext{For \(x = 0\),}
+        p_X(0) =&\; \frac{\binom{4}{0}!4}{4!} && \because\ \text{it is the
+          derangement of 4 objects}\\
+        =&\; \frac{\lfloor \frac{24}{e} + \frac{1}{2} \rfloor}{24}\\
+        =&\; \frac{9}{24}
+        \shortintertext{For \(x = 1\),}
+        p_X(1) =&\; \frac{\binom{4}{1}!3}{24} && \because\ \text{one ball is
+          fixed, while the other 3 are om a derangement}\\
+        =&\; \frac{4\lfloor \frac{3!}{e} + \frac{1}{2} \rfloor}{24}\\
+        =&\; \frac{(4)(2)}{24}\\
+        =&\; \frac{1}{3}
+        \shortintertext{For \(x = 2\)}
+        p_X(2) =&\; \frac{\binom{4}{2}!2}{24}\\
+        =&\; \frac{(6)\lfloor \frac{2!}{e} + \frac{1}{2} \rfloor}{24}\\
+        =&\; \frac{(6)(1)}{24}\\
+        =&\; \frac{1}{4}
+        \shortintertext{For \(x = 4\),}
+        p_X(4) =&\; \frac{\binom{4}{4}}{24}\\
+        =&\; \frac{1}{24}
+      \end{align*}
+      Therefore,
+      \begin{equation*}
+        \boxed{
+          p_X(x) =
+          \begin{cases}
+            \frac{9}{24}, & \text{if } x = 0\\
+            \frac{1}{3},  & \text{if } x = 1\\
+            \frac{1}{4},  & \text{if } x = 2\\
+            \frac{1}{24}, & \text{if } x = 4\\
+            0, & \text{otherwise}
+          \end{cases}
+        }
+      \end{equation*}
       \subpart{}
       Finding \(E[X]\).
+      \begin{align*}
+        E[X] =&\; \sum_{x \in \{0, 1, 2, 4\}} xp_X(x)\\
+        =&\; (0)(\frac{9}{24}) + (1)(\frac{1}{3}) + (2)(\frac{1}{4}) + (4)(\frac{1}{24})\\
+        =&\; \frac{1}{3} + \frac{1}{2} + \frac{1}{6}\\
+        \alignedbox{=}{1}
+      \end{align*}
     \end{subparts}
   \end{questions}
 \end{document}
