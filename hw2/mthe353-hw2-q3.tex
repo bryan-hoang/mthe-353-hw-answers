@@ -31,8 +31,7 @@
 
       The support of the joint pmf can be characterized as
       \begin{equation*}
-        \supp{} (p) = \{(x_1, x_2, x_3, x_4) \in \mathbb{Z}^n \mid
-          x_1 + x_2 + x_3 + x_4 = k,\; k \in \{0, 1, 2, 4\}\}
+        \supp{} (p) = \{(x_1, x_2, x_3, x_4) \in \mathbb{Z}^n \mid x_i = 0 \text{ or } 1,\; i \in {1, 2, 3, 4} \text{ and } x_1 + x_2 + x_3 + x_4 \neq 3\}
       \end{equation*}
       which contains 12 points.
 
@@ -44,10 +43,10 @@
         \boxed{
           p(x_1, x_2, x_3, x_4) = \left\{
           \begin{aligned}
-            &\frac{9}{24}, & \text{if } x_1 + x_2 + x_3 + x_4 = 0 && \text{(1 point)}\\
-            &\frac{1}{12}, & \text{if } x_1 + x_2 + x_3 + x_4 = 1 && \text{(4 points)}\\
-            &\frac{1}{24},  & \text{if } x_1 + x_2 + x_3 + x_4 = 2 && \text{(6 points)}\\
-            &\frac{1}{24}, & \text{if } x_1 + x_2 + x_3 + x_4 = 4 && \text{(1 point)}\\
+            &\frac{9}{24}, & \text{if } x_i = 0 \text{ or } 1,\; i \in {1, 2, 3, 4},\; x_1 + x_2 + x_3 + x_4 = 0 && \text{(1 point)}\\
+            &\frac{1}{12}, & \text{if } x_i = 0 \text{ or } 1,\; i \in {1, 2, 3, 4},\; x_1 + x_2 + x_3 + x_4 = 1 && \text{(4 points)}\\
+            &\frac{1}{24}, & \text{if } x_i = 0 \text{ or } 1,\; i \in {1, 2, 3, 4},\; x_1 + x_2 + x_3 + x_4 = 2 && \text{(6 points)}\\
+            &\frac{1}{24}, & \text{if } x_i = 0 \text{ or } 1,\; i \in {1, 2, 3, 4},\; x_1 + x_2 + x_3 + x_4 = 4 && \text{(1 point)}\\
             &0,            & \text{otherwise}                     && \text{(12 points total)}
           \end{aligned}
           \right.
