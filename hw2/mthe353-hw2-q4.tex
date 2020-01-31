@@ -13,11 +13,88 @@
     \question{}\
     \begin{subparts}
       \subpart{}
-      Finding the joint pdf of \((Y_1, \dots, Y_n),\; p(y_1, \dots, y_n)\).
+      Finding the joint pdf of \((Y_1, \dots, Y_n),\; f_Y(y_1, \dots, y_n)\).
+
+      Since \(X_1, \dots, X_N\) are independent, their joint pdf is then
+      \begin{align*}
+        f_X(x_1, \dots, x_n) =&\; f_{X_1}(x_1) \dots f_{X_n}(x_n)\\
+        =&
+        \begin{cases}
+          e^{-\sum_{i=1}^n x_i}, & \text{if } (x_1, \dots, x_n) \in \mathbb{R}_{\ge 0}^n\\
+          0, & \text{otherwise}
+        \end{cases}
+      \end{align*}
+      Let \(g_1(y_1, \dots, y_n) = y_1\) and \(g_k(y_1, \dots, y_n) = y_k - y_{k-1},
+      \; \forall k \in \{2, \dots, n\}\). We then have
+      \begin{align*}
+        J_g =&
+        \begin{vmatrix}
+          \partder{g_1}{y_1} & \cdots & \partder{g_1}{y_n}\\
+          \vdots & \ddots & \vdots\\
+          \partder{g_n}{y_1} & \cdots & \partder{g_n}{y_n}\\
+        \end{vmatrix}\\
+        =&\;
+        \begin{tikzpicture}[baseline=(current bounding box.center)]
+          \matrix (m) [matrix of math nodes, nodes in empty cells,
+            right delimiter={|}, left delimiter={|},ampersand replacement=\&]{
+            1 \&  \&  \&  \&  \& \\
+            -1 \& 1 \&  \&  \& \text{\huge0} \& \\
+             \&  \&  \&  \&  \& \\
+             \&  \&  \&  \&  \& \\
+             \& \text{\huge0} \&  \&  \& 1 \& \\
+             \&  \&  \&  \& -1 \& 1\\
+          };
+          \draw[loosely dotted] (m-2-2)-- (m-5-5);
+          \draw[loosely dotted] (m-2-1)-- (m-6-5);
+        \end{tikzpicture}
+        \intertext{Hopfully the illustration above gets the point across.}
+        =& \prod_{i=1}^n 1 && \because \text{ the matrix is lower triangular}\\
+        =&\; 1
+      \end{align*}
+      Then the joint pdf of \((Y_1, \dots, Y_n)\) is
+      \begin{align*}
+        f_Y(y_1, \dots, y_n) =&\; f_X(y_1, y_2 - y_1, \dots, y_n - y_{n-1})\abs{J_g}\\
+        =&\; e^{-y_1}e^{-(y_2-y_1)} \dots e^{-(y_n-y_{n-1})} \abs{1}\\
+        \alignedbox{=}{
+          \begin{cases}
+            e^{-y_n}, & \text{if } 0 \le y_1 \le y_2 \le \dots \le y_n < \infty\\
+            0, & \text{otherwise}
+          \end{cases}
+        }
+      \end{align*}
       \subpart{}
-      Finding the marginal pdf of \(Y_n\).
+      Finding the marginal pdf of \(Y_n, f_{Y_n}(y_n)\).
+      \begin{align*}
+        f_{Y_n}(y_n) =& \int_0^{y_n} \int_0^{y_{n-1}} \dots \int_0^{y_2} f_Y(y_1, \dots, y_n)
+          \, \mathrm{d}y_1 \dots \, \mathrm{d}y_{n-2} \, \mathrm{d}y_{n-1}\\
+        =& \int_0^{y_n} \int_0^{y_{n-1}} \dots \int_0^{y_2} e^{-y_n}
+          \, \mathrm{d}y_1 \dots \, \mathrm{d}y_{n-2} \, \mathrm{d}y_{n-1}\\
+        =&\; e^{-y_n} \int_0^{y_n} \int_0^{y_{n-1}} \dots \int_0^{y_2}
+          \, \mathrm{d}y_1 \dots \, \mathrm{d}y_{n-2} \, \mathrm{d}y_{n-1}\\
+        \alignedbox{=}{
+          \begin{cases}
+            e^{-y_n} \frac{y_n^{n-1}}{(n-1)!}, & \text{if } y_n \in [0, \infty)\\
+            0, & \text{otherwise}
+          \end{cases}
+        }
+      \end{align*}
       \subpart{}
       Determining if \(Y_1, \dots, Y_n\) are mutually independent.
+      \begin{claim}
+        \(Y_1, \dots, Y_n\) are not mutually independent.
+      \end{claim}
+      \begin{proof}(Contradiction)
+        Suppose \(Y_1, \dots, Y_n\) are mutually independent. Then we can write
+        \begin{align*}
+          f_Y(y_1, \dots, y_n) =&\; f_{Y_n}(y_n)f_{Y_1, \dots, Y_{n-1}}(y_1, \dots, y_{n-1})\\
+          \Rightarrow e^{-y_n} =&\; e^{-y_n} \frac{y_n^{n-1}}{(n-1)!} f_{Y_1, \dots, Y_{n-1}}(y_1, \dots, y_{n-1})\\
+          \Rightarrow f_{Y_1, \dots, Y_{n-1}}(y_1, \dots, y_{n-1}) =&\; \frac{(n-1)!}{y_n^{n-1}}
+        \end{align*}
+        which is a contradiction since \(f_{Y_1, \dots, Y_{n-1}}(y_1, \dots, y_{n-1})\)
+        cannot depend on \(y_n\) by the definition of a marginal pdf.
+
+        Hence, it follows that \(\boxed{Y_1, \dots, Y_n \text{ are \textbf{not} mutually independent.}}\)
+      \end{proof}
     \end{subparts}
   \end{questions}
 \end{document}
