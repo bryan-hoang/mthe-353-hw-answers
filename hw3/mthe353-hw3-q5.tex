@@ -1,0 +1,36 @@
+\documentclass[hwnumber=3]{mthe353answer}
+
+\begin{document}
+  \begin{questions}
+    \setcounter{question}{4}
+    \question{}
+    Showing that~\eqref{eq:toprove} is true.
+    \begin{equation}
+      \label{eq:toprove}
+      \lim\limits_{n \rightarrow \infty} P(X_{(n)} - \ln n \le x) = \exp(-e^{-x})
+    \end{equation}
+    \begin{solution}
+      \begin{proof}
+        Since the mean of each \(X_i,\; i \in \{1, \dots, n\}\), is 1, that means
+        \(\lambda = 1\). Given the premise, the pdf of \(X_(n)\) is
+        \begin{align*}
+          f_n(x) &= nf(x)F(x)^{n-1}
+          \shortintertext{Then the cdf of \(X_(n)\) is}
+          F_n(x) &= \int_{\infty}^x nf(x)F(x)^{n-1} \dd{x_n}\\
+          &= F(x)^n
+          \shortintertext{where \(F(x)\) is the common cdf of the \(X_i\)}
+        \end{align*}
+        Hence, the LHS of~\eqref{eq:toprove} is
+        \begin{align*}
+          \limit{n}{\infty} P(X_{(n)} - \ln n \le x) &= \limit{n}{\infty} P(X_{(n)} \le x + \ln n)\\
+          &= \limit{n}{\infty} F_n(x + \ln n)\\
+          &= \limit{n}{\infty} F(x + \ln n)^n\\
+          &= \limit{n}{\infty} (1 - e^{-(x + \ln n)})^n\\
+          &= \limit{n}{\infty} \left(1 + \frac{(-e^{-x})}{n}\right)^n\\
+          &= \exp(-e^{-x})\\
+          &= \text{RHS of~\eqref{eq:toprove}}\qedhere
+        \end{align*}
+      \end{proof}
+    \end{solution}
+  \end{questions}
+\end{document}

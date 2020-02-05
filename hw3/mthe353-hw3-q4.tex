@@ -1,0 +1,51 @@
+\documentclass[hwnumber=3]{mthe353answer}
+
+\begin{document}
+  \begin{questions}
+    \setcounter{question}{3}
+    \question{}
+    \begin{solution}
+      \begin{note}
+        \begin{equation*}
+          (\min(X_1, \dots, X_n), \max(X_1, \dots, X_n)) = (X_{(1)}, X_{(n)})
+        \end{equation*}
+        Since \(X_1, \dots, X_n\) are mutually independent Uniform(0,1) random
+        variables, the joint pdf of \(X_{(1)}\) and \(X_{(n)}\) is
+        \begin{align*}
+          f_{1,n}(x_1, x_n) =&\; n!f(x_1)f(x_n)\frac{(F(x_n) - F(x_1))^{n-2}}{(n-2)!}\\
+          =&\; n(n-1)(1)(1)(x_n-x_1)^{n-2}\\
+          =&
+          \begin{cases}
+            n(n-1)(x_n-x_1)^{n-2}, & \text{if } 0 < x_1 < x_n < 1\\
+            0, & \text{otherwise}
+          \end{cases}
+        \end{align*}
+      \end{note}
+      Given the above observations, the probability that the interval \((X_{(1)}, X_{(n)})\)
+      contains the value \(\frac{1}{2}\) is
+      \begin{align*}
+        P(X_{(1)} < \frac{1}{2} < X_{(n)})
+        &= \int_{\frac{1}{2}}^1 \int_0^{\frac{1}{2}} f_{1,n}(x_1, x_n) \dd{x_1} \dd{x_n}\\
+        &= \int_{\frac{1}{2}}^1 \int_0^{\frac{1}{2}} n(n-1)(x_n-x_1)^{n-2} \dd{x_1} \dd{x_n}\\
+        &= \int_{\frac{1}{2}}^1 n\left[-(x_n-x_1)^{n-1}\right]_{x_1=0}^{x_1=\frac{1}{2}} \dd{x_n}\\
+        &= \int_{\frac{1}{2}}^1 n\left(- \left(x_n - \frac{1}{2}\right)^{n-1} + x_n^{n-1}\right) \dd{x_n}\\
+        &= \left[- \left(x_n - \frac{1}{2}\right)^n + x_n^n\right]_{x_n=\frac{1}{2}}^{x_n=1}\\
+        &= -\left(\frac{1}{2}\right)^n + 1 + 0 - \left(\frac{1}{2}\right)^n\\
+        \alignedbox{\phantom{\!}}{= 1 - \left(\frac{1}{2}\right)^{n-1}}\\
+      \end{align*}
+      The smallest \(n\) such that this probability is at least 0.95 is
+      \begin{align*}
+        1 - \left(\frac{1}{2}\right)^{n-1} &> 0.95\\
+        \left(\frac{1}{2}\right)^{n-1} &< 0.05\\
+        (n-1)(-\ln(2)) &< \ln(\frac{1}{20})\\
+        n &> \frac{\ln(20)}{\ln(2)} + 1
+        \shortintertext{Then}
+        \floor{\frac{\ln(20)}{\ln(2)} + 1} &= \floor{5.3\dots}\\
+        &= 5
+      \end{align*}
+      \begin{equation*}
+        \Rightarrow \boxed{n > 5}
+      \end{equation*}
+    \end{solution}
+  \end{questions}
+\end{document}

@@ -1,0 +1,104 @@
+\documentclass[hwnumber=3]{mthe353answer}
+
+\begin{document}
+  \begin{questions}
+    \setcounter{question}{2}
+    \question{}
+    \begin{note}
+      Since \(X_1, X_2, X_3\) are iid r.v.'s, their joint pdf will be
+      \begin{equation}
+        \label{eq:jointpdf}
+        f_X(x_1,x_2, x_3) =
+        \begin{cases}
+          f(x_1)f(x_2)f(x_3), & \text{if } x_1, x_2, x_3 \in S_X\\
+          0, & \text{otherwise}
+        \end{cases}
+      \end{equation}
+      where \(S_X\) is the support of the random variables.
+    \end{note}
+    \begin{parts}
+% PART (A)
+      \part{}
+      The common distribution of \(X_i\) is the Uniform(0, 1) distribution.
+      \begin{solution}
+        By~\eqref{eq:jointpdf}, the joint pdf is then
+        \begin{equation*}
+          f_X(x_1, x_2, x_3) =
+          \begin{cases}
+            1, & \text{if } x_1, x_2, x_3 \in [0, 1]\\
+            0, & \text{otherwise}
+          \end{cases}
+        \end{equation*}
+        That means the joint pdf of the order statistics \(X_{(1)}, X_{(2)},
+        X_{(3)}\) is
+        \begin{align*}
+          f_{1, 2, 3}(x_1, x_2, x_3) =&
+          \begin{cases}
+            3!(1), & \text{if } 0 < x_1 < x_2 < x_3 < \infty\\
+            0, & \text{otherwise}
+          \end{cases}\\
+          =&
+          \begin{cases}
+            6, & \text{if } x_1, x_2, x_3 \in [0, 1] \text{ and } x_1 < x_2 < x_3\\
+            0, & \text{otherwise}
+          \end{cases} \label{eq:uniformpdf} \numberthis{}
+        \end{align*}
+        Since \(X_1, X_2, X_3\) are uniformly distributed, the probability that
+        the second-largest value, \(X_{(2)}\) (i.e., the median), is closer to the smallest
+        value, \(X_{(1)}\), rather than than to the largest value, \(X_{(3)}\),
+        is the same in either case. It can be seen in~\eqref{eq:uniformpdf} that
+        computing the probability will be symmetric in either case due to the lack
+        of dependence on the values of \(x_1, x_2, x_3\). Since the cardinality
+        of the sample space in question is 2, the probability is then equal to~
+        \(\boxed{\frac{1}{2}}\).
+      \end{solution}
+% PART (B)
+      \part{}
+      The common distribution of \(X_i\) is the Exponential(\(\lambda\))
+      distribution.
+      \begin{solution}
+        By~\eqref{eq:jointpdf}, the joint pdf is then
+        \begin{equation*}
+          f_X(x_1, x_2, x_3) =
+          \begin{cases}
+            \lambda^3 e^{-\lambda(x_1 + x_2 + x_3)}, & \text{if } x_1, x_2, x_3 \in \left[0, \infty\right)\\
+            0, & \text{otherwise}
+          \end{cases}
+        \end{equation*}
+        That means the joint pdf of the order statistics \(X_{(1)}, X_{(2)},
+        X_{(3)}\) is
+        \begin{align*}
+          f_{1, 2, 3}(x_1, x_2, x_3) =&
+          \begin{cases}
+            6\lambda^3 e^{-\lambda(x_1 + x_2 + x_3)}, & \text{if } 0 < x_1 < x_2 < x_3 < \infty\\
+            0, & \text{otherwise}
+          \end{cases}
+        \end{align*}
+        The probability we want to compute is
+        \begin{align*}
+          &\; P(X_{(2)} - X_{(1)} < X_{(3)} - X_{(2)})\\
+          =&\; P(2X_{(2)} < X_{(1)} + X_{(3)})\\
+          =&\; P(X_{(2)} < \frac{X_{(1)} + X_{(3)}}{2})\\
+          =&\; \iiint \limits_{\mathbb{R}} f_{1, 2, 3}(x_1, x_2, x_3)
+            \, \textrm{d}x_2 \, \textrm{d}x_1 \, \textrm{d}x_3\\
+          =&\; \int_0^\infty \int_0^{x_3} \int_{x_1}^{\frac{x_1 + x_3}{2}} 6\lambda^3 e^{-\lambda(x_1 + x_2 + x_3)}
+            \, \textrm{d}x_2 \, \textrm{d}x_1 \, \textrm{d}x_3\\
+          =&\; \int_0^\infty \int_0^{x_3} 6\lambda^2\left[-e^{-\lambda(x_1+x_2+x_3)}\right]_{x_2=x_1}^{x_2=\frac{x_1+x_3}{2}}
+            \, \textrm{d}x_1 \, \textrm{d}x_3\\
+          =&\; \int_0^\infty \int_0^{x_3} 6\lambda^2\left(-e^{-\frac{3}{2}\lambda(x_1+x_3)} + e^{-\lambda(2x_1+x_3)}\right)
+            \, \textrm{d}x_1 \, \textrm{d}x_3\\
+          =&\; \int_0^\infty \lambda\left(\biggl[4e^{-\frac{3}{2}\lambda(x_1+x_3)}\biggr]_{x_1=0}^{x_1=x_3}
+            + \biggl[-3e^{-\lambda(2x_1+x_3)}\biggr]_{x_1=0}^{x_1=x_3}\right)
+            \, \textrm{d}x_3\\
+          =&\; \int_0^\infty \lambda\left(4\left(e^{-3\lambda x_3} - e^{-\frac{3}{2}\lambda x_3}\right)
+            - 3\left(e^{-3\lambda x_3} - e^{-\lambda x_3}\right)\right)
+            \, \textrm{d}x_3\\
+          =&\; \left[-\frac{4}{3}e^{-3\lambda x_3} + \frac{8}{3}e^{-\frac{3}{2}\lambda x_3}
+            + e^{-3\lambda x_3} -3e^{-\lambda x_3}\right]_{x_3=0}^{x_3=\infty}\\
+          =&\; \frac{4}{3} - \frac{8}{3} - 1 + 3\\
+          \alignedbox{=}{\frac{2}{3}}
+        \end{align*}
+      \end{solution}
+    \end{parts}
+  \end{questions}
+\end{document}

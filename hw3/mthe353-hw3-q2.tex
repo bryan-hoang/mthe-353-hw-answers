@@ -1,0 +1,105 @@
+\documentclass{mthe353answer}
+
+\lhead{
+  MTHE/STAT 353 - Homework 3, 2020\\
+  \vspace{1em}
+  \underline{\makebox[1.35in][c]{20053722}}\\
+  Student Number
+}
+
+\begin{document}
+  \begin{questions}
+    \setcounter{question}{1}
+    \question{}
+    \begin{solution}
+      \begin{proof}
+        \begin{note}
+          Since \(X_1, \dots, X_n\) are independent exponential random variables
+          with parameter \(\lambda\), then their joint pdf is
+          \begin{align*}
+            f_X(x_1, \dots, x_n) =&\; f(x_1) \dots f(x_N)\\
+            =&\; \lambda e^{-\lambda x_1} \dots \lambda e^{-\lambda x_n}\\
+            =&
+            \begin{cases}
+              \lambda^n e^{-\lambda \sum_{i=1}^n x_i}, & \text{if } (x_1, \dots, x_n) \in \mathbb{R}_{\ge 0}^n\\
+              0, & \text{otherwise}
+            \end{cases}
+          \end{align*}
+          Also, the joint pdf of \(X_{(1)}, \dots, X_{(n)}\) is
+          \begin{align*}
+            f_{1, \dots, n}(x_1, \dots, x_n) =&\; n!f(x_1) \dots f(x_n)\\
+            =&
+            \begin{cases}
+              n!\lambda^n e^{-\lambda \sum_{i=1}^n x_i}, & \text{if } 0 < x_1 < \cdots < x_n.\\
+              0, & \text{otherwise.}
+            \end{cases}
+          \end{align*}
+        \end{note}
+        First, let's find the joint pdf of \(Y_1, \dots, Y_n\). For \(i \in \{1, \dots, n\}\),
+        define the following set of functions:
+        \begin{equation*}
+          g_i(y_1, \dots, y_n) = \sum_{k = 1}^i \frac{y_i}{n+1-k}
+        \end{equation*}
+        We then have
+        \begin{align*}
+          \abs{J_g(y_1, \dots, y_n)} =&
+          \begin{vmatrix}
+            \partder{g_1}{y_1} & \cdots & \partder{g_1}{y_n}\\
+            \vdots & \ddots & \vdots\\
+            \partder{g_n}{y_1} & \cdots & \partder{g_n}{y_n}\\
+          \end{vmatrix}\\
+          =&
+          \begin{tikzpicture}[baseline=(current bounding box.center)]
+            \matrix (m) [matrix of math nodes, nodes in empty cells,
+              right delimiter={|}, left delimiter={|},ampersand replacement=\&]{
+              \frac{1}{n} \&  \&  \&  \&  \& \\
+              \frac{1}{n} \& \frac{1}{n-1} \&  \&  \& \text{\huge0} \& \\
+              \frac{1}{n} \& \frac{1}{n-1} \& \frac{1}{n-2} \&  \&  \& \\
+               \&  \&  \&  \&  \& \\
+               \&  \&  \&  \& \frac{1}{2} \& \\
+               \frac{1}{n} \&  \&  \&  \& \frac{1}{2} \& \frac{1}{1}\\
+            };
+            \draw[loosely dotted] (m-3-3)--(m-5-5);
+            \draw[loosely dotted] (m-3-2)--(m-6-5);
+            \draw[loosely dotted] (m-3-1)--(m-6-1);
+            \draw[loosely dotted] (m-6-1)--(m-6-6);
+          \end{tikzpicture}
+          \\
+          =&\; \prod_{i=1}^n \frac{1}{i} && \because J_g \text{ is a lower triangular matrix.}\\
+          =&\; \frac{1}{n!}
+        \end{align*}
+        For the support of \(Y = (Y_1, \dots, Y_n)\),
+        \begin{gather*}
+          0 < \frac{y_1}{n} < \frac{y_1}{n} + \frac{y_2}{n-1} < \cdots < \frac{y_1}{n} + \cdots + y_n\\
+          \Rightarrow (y_1, \dots, y_n) \in \mathbb{R}_{\ge 0}^n
+        \end{gather*}
+        It follows that the joint pdf of \(Y_1, \dots, Y_n\) is
+        \begin{align*}
+          f_Y(y_1, \dots, y_n) =&\; f_{1, \dots, n}(g_1(y_1, \dots, y_n), \dots, g_n(y_1, \dots, y_n)) \abs{J_g(y_1, \dots, y_n)}\\
+          =&\; n!\lambda^n \left(e^{-\lambda \sum_{i=1}^n \sum_{k = 1}^i \frac{y_i}{n+1-k}}\right) \frac{1}{n!}\\
+          =&
+          \begin{cases}
+            \lambda^n e^{-\lambda \sum_{i=1}^n y_i}, & \text{if } (y_1, \dots, y_n) \in \mathbb{R}_{\ge 0}^n\\
+            0, & \text{otherwise}
+          \end{cases}\\
+          =&\; f_X(y_1, \dots, y_n)
+        \end{align*}
+        Therefore, \(Y_1, \dots, Y_n\) has the same joint distribution as \(X_1, \dots, X_n\).
+
+        For \(i \in \{1, \dots, n\}\) and \(\{j_1, \dots, j_{n-1}\} = \{1, \dots, n\} \backslash \{i\}\), the marginal pdf for \(Y_i\) is
+        \begin{align*}
+          f_{Y_i}(y_i) =& \idotsint \limits_{\mathbb{R}^{n-1}} f_Y(y_1, \dots, y_n) \, \textrm{d}y_{j_1} \dots \, \textrm{d}y_{j_{n-1}}\\
+          =& \int_0^\infty \dots \int_0^\infty \lambda^n e^{-\lambda \sum_{k=1}^n y_k} \, \textrm{d}y_{j_1} \dots \, \textrm{d}y_{j_{n-1}}\\
+          =&
+          \begin{cases}
+            \lambda e^{-\lambda y_i}, & \text{if } y_i \in \mathbb{R}_{\ge 0}\\
+            0, & \text{otherwise}
+          \end{cases}
+        \end{align*}
+        It can be seen that \(f_Y(y_1, \dots, y_n) = f_{Y_1}(y_1) \dots f_{Y_n}(y_n)\).
+
+        Hence, \(Y_1, \dots, Y_n\) are also independent.
+      \end{proof}
+    \end{solution}
+  \end{questions}
+\end{document}
