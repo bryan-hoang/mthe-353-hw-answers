@@ -1,0 +1,57 @@
+\documentclass[hwnumber=3,studentnumber=20053722]{mthe353answer}
+
+\begin{document}
+  \begin{questions}
+    \setcounter{question}{0}
+    \question{}\noindent
+    \begin{parts}
+      \part{}\label{part:a}
+      Finding \(P(X_n = X_{(k)})\) for \(k = 1, \dots, n\).
+      \begin{solution}
+        As noted by the given hint, since all orderings of \(X_1, \dots, X_n\)
+        are equally likely,
+        \begin{equation}\label{eq:equality}
+          P(X_n = X_{(1)}) = \cdots = P(X_n = X_{(n)})
+        \end{equation}
+        Given the sample space, we also have
+        \begin{equation}\label{eq:sum}
+          \sum_{i=1}^n P(X_n = X_{(i)}) = 1
+        \end{equation}
+        Given~\eqref{eq:equality} and~\eqref{eq:sum}, it follows that
+        \begin{align*}
+          \sum_{i=1}^n P(X_n = X_{(i)}) =&\; 1\\
+          \sum_{i=1}^n P(X_n = X_{(k)}) =&\; 1, && \text{for } k \in \{1, \dots, n\} \text{, by~\eqref{eq:equality}}\\
+          n P(X_n = X_{(k)}) =&\; 1, && \text{for } k \in \{1, \dots, n\}
+        \end{align*}
+        \begin{equation*}
+          \Rightarrow \boxed{P(X_n = X_{(k)}) =\; \frac{1}{n},\; \text{for } k \in \{1, \dots, n\}}
+        \end{equation*}
+      \end{solution}
+      \part{}
+      Showing that \((X_n, X_{(n)})\) does not have a joint pdf.
+      \begin{solution}
+        \begin{proof}
+          (Contradiction)\\
+          Suppose that \((X_n, X_{(n)})\) does have a joint pdf, \(f(x_1, x_2)\).
+          From~\partref{part:a}, we know that
+          \begin{equation}
+            \label{eq:x's equal 1/n}
+            P(X_n = X_{(n)}) = \frac{1}{n}
+          \end{equation}
+          But since we know that the joint pdf of \((X_n, X_{(n)})\) exists, we
+          can compute the LHS of~\eqref{eq:x's equal 1/n} as follows:
+          \begin{align*}
+            P(X_n = X_{(n)}) =&\; \iint\limits_{\{(x, x) | x \in \mathbb{R}\}}
+              f(x_1, x_2) \, \textrm{d}x_1 \, \textrm{d}x_2 \\
+            =&\; \int_{\mathbb{R}} \int_{x_2}^{x_2} f(x_1, x_2) \, \textrm{d}x_1 \, \textrm{d}x_2\\
+            =&\; \int_{\mathbb{R}} 0 \, \textrm{d}x_2\\
+            =&\; 0\\
+            \neq&\; \frac{1}{n}
+          \end{align*}
+          which contradicts~\eqref{eq:x's equal 1/n}. Therefore,
+          \((X_n, X_{(n)})\) does not have a joint pdf.
+        \end{proof}
+      \end{solution}
+    \end{parts}
+  \end{questions}
+\end{document}
