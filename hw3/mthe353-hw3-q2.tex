@@ -1,11 +1,4 @@
-\documentclass{mthe353answer}
-
-\lhead{
-  MTHE/STAT 353 - Homework 3, 2020\\
-  \vspace{1em}
-  \underline{\makebox[1.35in][c]{20053722}}\\
-  Student Number
-}
+\documentclass[hwnumber=3,studentnumber=20053722]{mthe353answer}
 
 \begin{document}
   \begin{questions}
@@ -13,29 +6,27 @@
     \question{}
     \begin{solution}
       \begin{proof}
-        \begin{note}
-          Since \(X_1, \dots, X_n\) are independent exponential random variables
-          with parameter \(\lambda\), then their joint pdf is
-          \begin{align*}
-            f_X(x_1, \dots, x_n) =&\; f(x_1) \dots f(x_N)\\
-            =&\; \lambda e^{-\lambda x_1} \dots \lambda e^{-\lambda x_n}\\
-            =&
-            \begin{cases}
-              \lambda^n e^{-\lambda \sum_{i=1}^n x_i}, & \text{if } (x_1, \dots, x_n) \in \mathbb{R}_{\ge 0}^n\\
-              0, & \text{otherwise}
-            \end{cases}
-          \end{align*}
-          Also, the joint pdf of \(X_{(1)}, \dots, X_{(n)}\) is
-          \begin{align*}
-            f_{1, \dots, n}(x_1, \dots, x_n) =&\; n!f(x_1) \dots f(x_n)\\
-            =&
-            \begin{cases}
-              n!\lambda^n e^{-\lambda \sum_{i=1}^n x_i}, & \text{if } 0 < x_1 < \cdots < x_n.\\
-              0, & \text{otherwise.}
-            \end{cases}
-          \end{align*}
-        \end{note}
-        First, let's find the joint pdf of \(Y_1, \dots, Y_n\). For \(i \in \{1, \dots, n\}\),
+        Since \(X_1, \dots, X_n\) are independent exponential random variables
+        with parameter \(\lambda\), then their joint pdf is
+        \begin{align*}
+          f_X(x_1, \dots, x_n) =&\; f(x_1) \dots f(x_N)\\
+          =&\; \lambda e^{-\lambda x_1} \dots \lambda e^{-\lambda x_n}\\
+          =&
+          \begin{cases}
+            \lambda^n e^{-\lambda \sum_{i=1}^n x_i}, & \text{if } (x_1, \dots, x_n) \in \mathbb{R}_{\ge 0}^n\\
+            0, & \text{otherwise}
+          \end{cases}
+        \end{align*}
+        Also, the joint pdf of \(X_{(1)}, \dots, X_{(n)}\) is
+        \begin{align*}
+          f_{1, \dots, n}(x_1, \dots, x_n) =&\; n!f(x_1) \dots f(x_n)\\
+          =&
+          \begin{cases}
+            n!\lambda^n e^{-\lambda \sum_{i=1}^n x_i}, & \text{if } 0 < x_1 < \cdots < x_n.\\
+            0, & \text{otherwise.}
+          \end{cases}
+        \end{align*}
+        Given the above facts, let's find the joint pdf of \(Y_1, \dots, Y_n\). For \(i \in \{1, \dots, n\}\),
         define the following set of functions:
         \begin{equation*}
           g_i(y_1, \dots, y_n) = \sum_{k = 1}^i \frac{y_i}{n+1-k}
