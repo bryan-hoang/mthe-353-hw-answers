@@ -4,9 +4,32 @@
   \begin{questions}
     \setcounter{question}{1}
     \question{}
-    Finding \(E[X_i X_j]\).
+    Finding \(E[X_i X_j], \text{ for } i, j \in \{1, \dots, k\}\).
     \begin{solution}
-      Let
+      Let \(X_i = X_{i,1} + \dots + X_{i,n}\) where
+      \begin{align*}
+        X_{i,k} &=
+        \begin{cases}
+          1, & \text{if the \(k\)th multinomial experiment has outcome i}\\
+          0, & \text{otherwise}
+        \end{cases}
+        \intertext{and let \(X_j = X_{j,1} + \dots + X_{j,n}\) where}
+        X_{j,k} &=
+        \begin{cases}
+          1, & \text{if the \(k\)th multinomial experiment has outcome j}\\
+          0, & \text{otherwise}
+        \end{cases}
+      \end{align*}
+      We then have
+      \begin{align*}
+        E[X_i X_j] &= E\left[\left(\sum_{l=1}^n X_{i,l}\right)
+          \left(\sum_{m=1}^n X_{j,m}\right)\right]\\
+        &= E\left[\sum_{l=1}^n \sum_{m=1}^n X_{i,l} X_{j,m}\right] &&
+          \text{by the distributivity of summation}\\
+        &= \sum_{l=1}^n \sum_{m=1}^n E\left[X_{i,l} X_{j,m}\right] &&
+          \text{by the linearity of expectation}\\
+        &=
+      \end{align*}
     \end{solution}
   \end{questions}
 \end{document}

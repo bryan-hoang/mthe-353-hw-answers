@@ -4,9 +4,58 @@
   \begin{questions}
     \setcounter{question}{4}
     \question{}
+    For \(n = 0, 1, 2, 3, \dots\), show that
+    \begin{equation}
+      \label{eq:statement-to-prove}
+      \Gamma(n+\frac{1}{2}) = \frac{\sqrt{\pi}(2n)!}{4^{n}n!}
+    \end{equation}
     \begin{solution}
-      \begin{proof}
-        Foo
+      \begin{proof} (Induction)\\
+        \emph{Base case}: For \(n = 0\), we have that
+        \begin{align*}
+          \Gamma(0 + \frac{1}{2}) &= \int_0^\infty y^{\frac{1}{2}-1}
+            e^{-y} \dd{y}\\
+          &= \int_0^\infty \frac{e^{-y}}{\sqrt{y}} \dd{y}
+          \intertext{Let \(u = \sqrt{y}\). We then have}
+          \Gamma(\frac{1}{2}) &= 2 \int_0^\infty \underbrace{e^{-u^2}}_I \dd{u}
+          \intertext{where \(I\) is related to the pdf of a Normal(0,
+            \(\frac{1}{2}\)) random variable. It follows that}
+          \Gamma(\frac{1}{2}) &= 2 \left(\frac{1}{2}\right)
+            \left(\sqrt{\frac{1}{2}}\sqrt{2\pi}\right)\\
+          &= \sqrt{\pi}\\
+          &= \frac{\sqrt{\pi}(2 \cdot 0)!}{4^0(0)!}
+        \end{align*}
+        which means~\eqref{eq:statement-to-prove} is true for \(n = 0\).
+
+        \emph{Inductive step}: Suppose~\eqref{eq:statement-to-prove} holds for
+        \(k \in \Z_{\ge 0}\). Then we have that
+        \begin{align*}
+          \Gamma((k+1)+\frac{1}{2}) &= \int_0^\infty y^{(k+1)+\frac{1}{2}-1}
+            e^{-y} \dd{y}\\
+          &= \int_0^\infty y^{k+\frac{1}{2}} e^{-y} \dd{y}
+          \intertext{Let \(u = y^{k+\frac{1}{2}}\) and \(\dd(v) = e^{-y}\).
+            Then integration by parts gives us}
+          \Gamma((k+1)+\frac{1}{2}) &=
+            \left[\left(k+\frac{1}{2}\right)y^{k-\frac{1}{2}}e^{-y}\right]_0^\infty
+            - \int_0^\infty \left(k+\frac{1}{2}\right)(-1)y^{k-\frac{1}{2}} e^{-y} \dd{y}\\
+          &= 0 + \left(k+\frac{1}{2}\right) \int_0^\infty y^{k-\frac{1}{2}} e^{-y} \dd{y}\\
+          &= \left(k+\frac{1}{2}\right) \Gamma(k+\frac{1}{2})\\
+          &= \left(k+\frac{1}{2}\right) \left(\frac{\sqrt{\pi}(2k)!}{4^k k!}\right)
+          \intertext{by the inductive hypothesis. Then}
+          \Gamma((k+1)+\frac{1}{2}) &= \left(k+\frac{1}{2}\right) \left(\frac{\sqrt{\pi}(2k)!}{4^k k!}\right)
+            \left(\frac{4}{4}\right)\left(\frac{k+1}{k+1}\right)
+          \intertext{by the twice repeated application of
+            \textbf{MULTIPLYING BY 1}! Hence, we have that}
+          \Gamma((k+1)+\frac{1}{2}) &= \frac{\sqrt{\pi}(2k)!(2k+2)(2k+1)}
+            {4^{k+1}(k+1)!}\\
+          &= \frac{\sqrt{\pi}(2k+2)!}{4^{k+1}(k+1)!}\\
+          &= \frac{\sqrt{\pi}(2(k+1))!}{4^{k+1}(k+1)!}
+        \end{align*}
+        Thus,~\eqref{eq:statement-to-prove} holds for \(k+1\).
+
+        Since both the base case and inductive step have been performed, then by
+        mathematical induction, the statement~\eqref{eq:statement-to-prove} holds
+        for all \(n \in \Z_{\ge 0}\).
       \end{proof}
     \end{solution}
   \end{questions}

@@ -3,24 +3,63 @@
 \begin{document}
   \begin{questions}
     \setcounter{question}{0}
-    \question{}\noindent
+    \question{}
+    For \(i \in \{1, \dots, 6\}\), let
+    \begin{equation*}
+      X_i = \text{\# of times the number i is rolled in ten dice rolls}
+    \end{equation*}
+    Then \((X_1, \dots, X_6)\) have a multinomial distribution with parameters
+    10 and \((\frac{1}{6}, \dots, \frac{1}{6})\).
     \begin{parts}
       \part{}
-      Finding the probability that one 1, two 2's, and four 4's are rolled.
+      Finding the probability that one 1, two 2's, three 3's, and four 4's are rolled.
       \begin{solution}
-        Foo
+        \begin{note}
+          \(10-1-2-3-4=0\)
+        \end{note}
+        Using the joint marginal pmf of \((X_1, X_2, X_3, X_4)\), we can
+        calculate the probability as follows:
+        \begin{align*}
+          P(X_1=1, X_3=3, X_2=2, X_4=4) &= \frac{10!}{1!2!3!4!(0)!}
+           \left(\frac{1}{6}\right)^{10}\left(1-2\left(\frac{1}{6}\right)\right)^0\\
+          &= \frac{10!}{1!2!3!4!(6)^{10}}\\
+          &= \frac{175}{839\,808}\\
+          \alignedbox{\approx 0.00021}
+        \end{align*}
       \end{solution}
       \part{}
-      Finding the probability that the number of 1’s plus the number of 2’s
-      equals three and the number of 3’s equals four.
+      Finding the probability that the number of 1's plus the number of 2's
+      equals three and the number of 3's equals four.
       \begin{solution}
-        Bar
+        Let's calculate the probability of the above event using combinatorics.
+        \begin{align*}
+          P(X_1+X_2=3, X_3=4) &=
+            \overbrace{\binom{10}{3}\left(\frac{1+1}{6}\right)^3}^{\text{choosing 1's or 2's}}
+            + \overbrace{\binom{7}{4}\left(\frac{1}{6}\right)^4}^{\text{choosing 3's}}
+            + \overbrace{\binom{3}{3}\left(\frac{1}{2}\right)^3}^{\text{choosing other numbers}}\\
+          &= \frac{175}{11\,664}\\
+          \alignedbox{\approx 0.015}
+        \end{align*}
       \end{solution}
+      \newpage
       \part{}
-      Finding the probability that three 5’s were rolled, given that exactly
+      Finding the probability that three 5's were rolled, given that exactly
       four of the ten rolls resulted in an outcome less than 4.
       \begin{solution}
-        Foobar
+        Let's calculate the probability of the above event using combinatorics.
+        \begin{align*}
+          \begin{split}
+            P\giventhat*{X_5=3}{\text{four dice \(<\) 4}} &=
+            \overbrace{\binom{10}{4}\left(\frac{1+1+1}{6}\right)^4}
+              ^{\text{choosing four dice \(<\) 4}} \cdot
+            \overbrace{\binom{6}{3}\left(\frac{1+1}{6}\right)^3}
+              ^{\text{choosing three 3's or 4's}} \\
+            &\quad \cdot \overbrace{\binom{3}{3}\left(\frac{1}{6}\right)^3}
+              ^{\text{choosing three 5's}}
+          \end{split}\\
+          &= \frac{175}{3\,888}\\
+          \alignedbox{\approx 0.045}
+        \end{align*}
       \end{solution}
     \end{parts}
   \end{questions}
