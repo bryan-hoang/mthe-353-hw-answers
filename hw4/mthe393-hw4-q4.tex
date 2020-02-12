@@ -6,7 +6,97 @@
     \question{}
     \begin{solution}
       \begin{proof}
-        Let \(Y = W\).
+        Let \(Y = W\). Then define \(g_1(x) = x \sqrt{\frac{y}{n}}\) and \(g_2(y)
+        = y\). Then Jacobian determinant is
+        \begin{align*}
+          \left|J_g(x,y)\right| &= \begin{vmatrix}
+            \pdv{g_1}{x} & \pdv{g_1}{y}\\
+            \pdv{g_2}{x} & \pdv{g_2}{y}
+          \end{vmatrix}\\
+          &= \begin{vmatrix}
+            \sqrt{\frac{y}{n}} & x\frac{1}{2\sqrt{ny}}\\
+            0 & 1
+          \end{vmatrix}\\
+          &= \sqrt{\frac{y}{n}}
+        \end{align*}
+        Since \(Z\) and \(W\) are independent, then the joint pdf of \((Z,W)\)
+        is
+        \begin{equation*}
+          f_{Z,W}(z,w) = \begin{cases}
+            \frac{1}{\sqrt{2\pi}}e^{-\frac{z^2}{2}} \cdot \frac{\left(\frac{1}{2}\right)
+              ^{\frac{n}{2}}}{\Gamma\left(\frac{n}{2}\right)}\, w^{\frac{n}{2}-1}
+              e^{-\frac{w}{2}}, & \text{if } z \in (-\infty,\infty) \text{ and }
+              w \in (0,\infty)\\
+            0, & \text{otherwise}
+          \end{cases}
+        \end{equation*}
+        Hence, the joint pmf of \((X,Y)\) is
+        \begin{align*}
+          f_{X,Y}(x,y) &= f_{Z,W}(g_1(x,y),g_2(x,y))\left|J_g(x,y)\right|\\
+          &= f_{Z,W}\left(x \sqrt{\frac{y}{n}},y\right) \left|\sqrt{\frac{y}{n}}\right|\\
+          &= \frac{1}{\sqrt{2\pi}}
+            e^{-\frac{\left(x \sqrt{\frac{y}{n}}\right)^2}{2}}
+            \cdot \frac{\left(\frac{1}{2}\right)
+            ^{\frac{n}{2}}}{\Gamma\left(\frac{n}{2}\right)}\,y^{\frac{n}{2}-1}
+            e^{-\frac{y}{2}}
+            \cdot \sqrt{\frac{y}{n}}\\
+          &= \frac{1}{\sqrt{n\pi}\,\Gamma\left(\frac{n}{2}\right)}
+            \cdot \frac{1}{\sqrt{2}} \left(\frac{1}{2}\right)^{\frac{n}{2}}
+            \cdot y^{\frac{n}{2}+\frac{1}{2}-1}
+            \cdot e^{-\frac{y}{2}-\frac{x^2y}{2n}}\\
+          &=\begin{cases}
+              \frac{1}{\sqrt{n\pi}\,\Gamma\left(\frac{n}{2}\right)}
+                \left(\frac{1}{2}\right)^{\frac{n+1}{2}}
+                y^{\left(\frac{n+1}{2}\right)-1}
+                e^{-\left(\frac{1+\frac{x^2}{n}}{2}\right)y},
+                & \text{if } x \in (-\infty, \infty) \text{ and } y \in(0,\infty)\\
+              0, & \text{otherwise}
+          \end{cases} \label{eq:joint_pdf} \numberthis
+        \end{align*}
+        Now, we can compute the pdf of \(X\) using~\eqref{eq:joint_pdf}.
+        \begin{align*}
+          f(x) &= \int\limits_\R f_{X,Y}(x,y) \dd{y}\\
+          &= \int_0^\infty \frac{1}{\sqrt{n\pi}\,\Gamma\left(\frac{n}{2}\right)}
+            \left(\frac{1}{2}\right)^{\frac{n+1}{2}}
+            y^{\left(\frac{n+1}{2}\right)-1}
+            e^{-\left(\frac{1+\frac{x^2}{n}}{2}\right)y}
+            \dd{y}\\
+          &= \frac{1}{\sqrt{n\pi}\,\Gamma\left(\frac{n}{2}\right)}
+            \left(\frac{1}{2}\right)^{\frac{n+1}{2}}
+            \int_0^\infty y^{\left(\frac{n+1}{2}\right)-1}
+            e^{-\left(\frac{1+\frac{x^2}{n}}{2}\right)y}
+            \dd{y} \label{eq:possible_pdf} \numberthis
+          \intertext{
+            The integrand of the integral in~\eqref{eq:possible_pdf} looks like the
+            pdf of a Gamma\(\left(\frac{n+1}{2},\frac{\left(1+\frac{x^2}{n}\right)}{2}\right)\)
+            random variable. Let's do some \textbf{\emph{magic}} and
+            \textbf{multiply by 1 TWICE} (i.e. \(\mathbf{1 = 1 \cdot 1}\)).
+            ~\eqref{eq:possible_pdf}
+            then becomes
+          }
+          f(x) &= \frac{1}{\sqrt{n\pi}\,\Gamma\left(\frac{n}{2}\right)}
+            \left(\frac{1}{2}\right)^{\frac{n+1}{2}}
+            \left(
+              \frac
+                {\left(1+\frac{x^2}{n}\right)^{\frac{n+1}{2}}}
+                {\left(1+\frac{x^2}{n}\right)^{\frac{n+1}{2}}}
+            \right)
+            \left(\frac{\Gamma(\frac{n+1}{2})}{\Gamma(\frac{n+1}{2})}\right)
+            \int_0^\infty y^{\left(\frac{n+1}{2}\right)-1}
+            e^{-\left(\frac{1+\frac{x^2}{n}}{2}\right)y}
+            \dd{y}\\
+          &= \frac{\Gamma(\frac{n+1}{2})}{\sqrt{n\pi}\,\Gamma\left(\frac{n}{2}\right)}
+            \left(1+\frac{x^2}{n}\right)^{-\left(\frac{n+1}{2}\right)}
+            \int_0^\infty
+            \frac{\left(\frac{1+\frac{x^2}{n}}{2}\right)^{\frac{n+1}{2}}}
+              {\Gamma(\frac{n+1}{2})}
+            y^{\left(\frac{n+1}{2}\right)-1}
+            e^{-\left(\frac{1+\frac{x^2}{n}}{2}\right)y}
+            \dd{y}\\
+          &= \frac{\Gamma(\frac{n+1}{2})}{\sqrt{n\pi}\,\Gamma\left(\frac{n}{2}\right)}
+            \left(1+\frac{x^2}{n}\right)^{-\left(\frac{n+1}{2}\right)},
+            \quad x \in (-\infty,\infty) \qedhere
+        \end{align*}
       \end{proof}
     \end{solution}
   \end{questions}

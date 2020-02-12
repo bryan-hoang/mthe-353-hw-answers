@@ -48,17 +48,26 @@
       \begin{solution}
         Let's calculate the probability of the above event using combinatorics.
         \begin{align*}
-          \begin{split}
-            P\giventhat*{X_5=3}{\text{four dice \(<\) 4}} &=
-            \overbrace{\binom{10}{4}\left(\frac{1+1+1}{6}\right)^4}
-              ^{\text{choosing four dice \(<\) 4}} \cdot
-            \overbrace{\binom{6}{3}\left(\frac{1+1}{6}\right)^3}
-              ^{\text{choosing three 3's or 4's}} \\
-            &\quad \cdot \overbrace{\binom{3}{3}\left(\frac{1}{6}\right)^3}
-              ^{\text{choosing three 5's}}
-          \end{split}\\
-          &= \frac{175}{3\,888}\\
-          \alignedbox{\approx 0.045}
+          P\giventhat*{X_5=3}{\text{four dice \(<\) 4}} &=
+            \frac{
+              P(X_5=3, \text{four dice \(<\) 4})
+            }{
+              P(\text{four dice \(<\) 4})
+            }\\
+          &= \frac{
+              \overbrace{\binom{10}{4}\left(\frac{1+1+1}{6}\right)^4}
+                ^{\text{choosing four dice \(<\) 4}} \cdot
+              \overbrace{\binom{6}{3}\left(\frac{1+1}{6}\right)^3}
+                ^{\text{choosing three 3's or 4's}}
+              \quad \cdot \overbrace{\binom{3}{3}\left(\frac{1}{6}\right)^3}
+                ^{\text{choosing three 5's}}
+            }{
+              \binom{10}{4}\left(\frac{1+1+1}{6}\right)^4
+              \underbrace{\binom{6}{6}\left(\frac{1}{2}\right)^6}
+                _{\text{choosing six dice \(\ge 4\)}}
+            }\\
+          &= \frac{160}{729}\\
+          \alignedbox{\approx 0.219}
         \end{align*}
       \end{solution}
     \end{parts}
