@@ -11,16 +11,103 @@
       \part{}
       Finding \(g_n(x)\).
       \begin{solution}
-        Foo
+        Let \(Y_n = g_n(x) = nX_{k}\). To find the pdf of \(Y_n\), let's compute
+        the cdf of \(Y_n\). With \(F_k\) as the cdf of the order statistic
+        \(X_{(k)}\), then
+        \begin{align*}
+          F_{Y_n}(y) &= P(Y_n \le y)\\
+          &= P(nX_{(k)} \le y)\\
+          &= P\left(X_{(k)} \le \frac{y}{n}\right)\\
+          &= F_k\left(\frac{y}{n}\right)
+          \intertext{With \(f_k\) as the marginal pdf of the order statistic
+            \(X_{(k)}\), and \(f\) and \(F\) as the common pdf and cdf of the
+            \(X_i\)'s, respectively, it follows that the pdf of \(Y_n\) (and
+            equivalently of \(g_n(x)\)) is}
+          f_{g_n}(y) &= f_{Y_n}(y)\\
+          &= \pdv{y} F_k\left(\frac{y}{n}\right)\\
+          &= \frac{1}{n} f_k\left(\frac{y}{n}\right)\\
+          &= \frac{1}{n} \left( \frac{n!}{(k-1)!(n-k)!} \overbrace{f\left(\frac{y}{n}\right)}^{\ne 0 \text{ if } y \in (0,n)}
+            F\left(\frac{y}{n}\right)^{k-1} \left(1-F\left(\frac{y}{n}\right)\right)^{n-k} \right)\\
+          \alignedbox{=
+            \begin{cases}
+              \frac{(n-1)!}{(k-1)!(n-k)!} \left(\frac{y}{n}\right)^{k-1}
+                \left(1-\frac{y}{n}\right)^{n-k}, & \text{if } y \in (0,n) \\
+              0, & \text{otherwise}
+            \end{cases}
+          }
+        \end{align*}
       \end{solution}
+      \newpage
       \part{}
       Showing that \(g_n(x)\) converges pointwise to the pdf of a Gamma\((k,1)\)
       distribution.
-      \begin{solution}
-        \begin{proof}
-          Bar
-        \end{proof}
-      \end{solution}
+      \begin{solutionfullwidth}
+        \begin{solution}
+          \begin{proof}
+            Let \(x \in \R\). Then
+            \begin{align*}
+              &\inviseq \limit{n}{\infty} f_{g_n}(x)\\
+              &= \limit{n}{\infty}
+                \begin{cases}
+                  \frac{(n-1)!}{(k-1)!(n-k)!} \left(\frac{x}{n}\right)^{k-1}
+                    \left(1-\frac{x}{n}\right)^{n-k}, & \text{if } x \in (0,n) \\
+                  0, & \text{otherwise}
+                \end{cases}\\
+              &= \limit{n}{\infty}
+                \begin{cases}
+                  \frac{1}{\Gamma(k)}\,x^{k-1}
+                    \frac{(n-1)!}{(n-k)!n^{k-1}} \left(1+\frac{(-x)}{n}\right)^n
+                    \left(1-\frac{x}{n}\right)^{-k}, & \text{if } x \in (0,n) \\
+                  0, & \text{otherwise}
+                \end{cases}\\
+              &= \limit{n}{\infty}
+                \begin{cases}
+                  \frac{1}{\Gamma(k)}\,x^{k-1}
+                    \frac{(n-1) \dots (n-k+1)(n-k)!}{(n-k)!n^{k-1}} \left(1+\frac{(-x)}{n}\right)^n
+                    \left(1-\frac{x}{n}\right)^{-k}, & \text{if } x \in (0,n) \\
+                  0, & \text{otherwise}
+                \end{cases}\\
+              &= \limit{n}{\infty}
+                \begin{cases}
+                  \frac{1}{\Gamma(k)}\,x^{k-1}
+                    \frac{(n-1) \dots (n-k+1)}{n^{k-1}} \left(1+\frac{(-x)}{n}\right)^n
+                    \left(1-\frac{x}{n}\right)^{-k}, & \text{if } x \in (0,n) \\
+                  0, & \text{otherwise}
+                \end{cases}\\
+              \intertext{where \((n-1) \dots (n-k+1)\) is a polynomial is degree
+                \(k-1\). We then have}
+              &=\begin{cases}
+                  \frac{1}{\Gamma(k)}\,x^{k-1} \limit{n}{\infty}
+                    \frac{(n-1) \dots (n-k+1)}{n^{k-1}} \left(1+\frac{(-x)}{n}\right)^n
+                    \left(1-\frac{x}{n}\right)^{-k}, & \text{if } x \in (0,n) \\
+                  0, & \text{otherwise}
+                \end{cases}\\
+              &=\begin{cases}
+                  \frac{1}{\Gamma(k)}\,x^{k-1} \limit{n}{\infty}
+                    \frac{(n-1) \dots (n-k+1)}{n^{k-1}}
+                    \limit{n}{\infty} \left(1+\frac{(-x)}{n}\right)^n
+                    \limit{n}{\infty} \left(1-\frac{x}{n}\right)^{-k},
+                    & \text{if } x \in \limit{n}{\infty} (0,n) \\
+                  0, & \text{otherwise}
+                \end{cases}
+              \shortintertext{Please excuse my notation for the support of the function.}
+              &=\begin{cases}
+                  \frac{1}{\Gamma(k)}\,x^{k-1} \left(1\right)
+                    \left(e^{-x}\right)
+                    \left(1\right),
+                    & \text{if } x \in (0,\infty) \\
+                  0, & \text{otherwise}
+                \end{cases}\\
+              &=\begin{cases}
+                  \frac{1^k}{\Gamma(k)}\,x^{k-1} \left(e^{-(1)x}\right),
+                    & \text{if } x \in (0,\infty) \\
+                  0, & \text{otherwise}
+                \end{cases}
+            \end{align*}
+            which is the pdf of a Gamma\((k,1)\) distribution.
+          \end{proof}
+        \end{solution}
+      \end{solutionfullwidth}
     \end{parts}
   \end{questions}
 \end{document}

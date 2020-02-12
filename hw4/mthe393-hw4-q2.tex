@@ -28,8 +28,20 @@
           \text{by the distributivity of summation}\\
         &= \sum_{l=1}^n \sum_{m=1}^n E\left[X_{i,l} X_{j,m}\right] &&
           \text{by the linearity of expectation}\\
-        &=
       \end{align*}
+      For each \(l,m \in \{1, \dots, n\}\),
+      \begin{equation*}
+        E\left[X_{i,l}X_{j,m}\right] =
+        \begin{cases}
+          p_i p_j, & \text{if } l \ne m\\
+          0, & \text{if } l = m
+        \end{cases}
+      \end{equation*}
+      Since \(l = m\) only \(n\) times in out of the total \(n^2\) terms in the summation,
+      we have that
+      \begin{equation*}
+        \boxed{E[X_i X_j] = (n^2-n)p_i p_j}
+      \end{equation*}
     \end{solution}
   \end{questions}
 \end{document}
