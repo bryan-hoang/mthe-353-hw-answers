@@ -1,0 +1,230 @@
+\section{Special Distributions}
+
+\subsection*{Binomial, \textnormal{Binomial}\((n, p)\)}
+\(
+  p(k) =
+  \begin{cases}
+    \binom{n}{k} p^k (1-p)^{n-k}, & \text{if }k \in \{0, 1, \dotsc, n\}\\
+    0, & \text{otherwise}
+  \end{cases}
+\)\\
+where \(\binom{n}{k} = \frac{n!}{k!(n-k)!}\)\\
+\(E[X] = np\)\\
+\(\text{Var}(X) = np(1-p)\)
+
+\subsection*{Geometric, \textnormal{Geometric}\((p)\)}
+\(
+  p(n) =
+  \begin{cases}
+    p(1-p)^{n-1}, & \text{if } n \in \integers_{> 0}\\
+    0, & \text{otherwise}
+  \end{cases}
+\)\\
+\(E[X] = \frac{1}{p}\)\\
+\(\text{Var}(X) = np(1-p)\)
+
+\subsection*{Negative Binomial, \textnormal{Negative Binomial}\((r, p)\)}
+\(
+  p(n) =
+  \begin{cases}
+    \binom{n-1}{r-1} p^r (1-p)^{n-r}, & \text{if } n \in \integers_{\ge r}\\
+    0, \text{otherwise}
+  \end{cases}
+\)\\
+\(E[X] = \frac{r}{p}\)\\
+\(\text{Var}(X) = \frac{r(1-p)}{p^2}\)
+
+\subsection*{Poisson, \textnormal{Poisson}\((\theta)\)}
+\(
+  p(k) =
+  \begin{cases}
+    \frac{\theta^k e^{-\theta}}{k!}, & \text{if } k \in \integers_{\ge 0}\\
+    0, & \text{otherwise}
+  \end{cases}
+\)\\
+\(E[X] = \lambda\)\\
+\(\text{Var}(X) = \lambda\)
+
+\subsection*{Poisson process with rate \(\lambda\)}
+\(N(t) \sim \text{Poisson}(\lambda t)\)
+
+\subsection*{Multivariate Hypergeometric}
+Usually occurs in situations \textbf{without replacement}.\\
+Parameters:
+\begin{itemize}
+  \item \(N\) objects
+  \item \(n_i\) of type \(i\), for \(i \in \{1, \dotsc, r\}\)
+  \item Pick \(k\) objects w/o replacement
+  \item \(X_i =\) \# of objects of type i picked.
+\end{itemize}
+pdfs:\\
+\(\frac{\binom{n_1}{x_1} \dots \binom{n_r}{x_r}}{\binom{N}{k}}\),
+\(\frac{\binom{n_1}{x_1} \dots \binom{n_{r-1}}{x_{r-1}}
+  \binom{n_r}{k-x_1- \dotsb - x_{r-1}}}
+  {\binom{N}{k}}\)\\
+\(\frac{\binom{n_{i_1}}{x_{i_1}} \dots \binom{n_{i_d}}{x_{i_d}}
+  \binom{N-n_{i_1}- \dotsb -n_{i_d}}{k-x_{i_1}- \dotsb -x_{i_d}}}
+  {\binom{N}{k}}\)\\
+Support:
+\begin{itemize}
+  \item \(x\)'s \(\in \{\max(0, k-(N-n\text{'s})), \dotsc, n\text{'s}\}\)
+  \item sum of \(x\)'s \(\in \{0, \dotsc, k\}\)
+\end{itemize}
+
+\subsection*{Order Statistics}
+Assumptions: iid r.v.'s\\
+pdfs:\\
+\(
+  f_{1, \dotsc, n}(x_1, \dotsc, x_n) =
+    \begin{cases}
+      n!f(x_1) \dotsm f(x_n), & \text{if}\ x_1 < \dotsb < x_n\\
+      0, & \text{otherwise}
+    \end{cases}
+\)\\
+\(
+  f_{k, \dotsc, n}(x_k, \dotsc,x_n) =
+    n! \frac{F(x_k)^{k-1}}{(k-1)!} f(x_k) \dotsm f(x_n)
+\)\\
+\(
+  f_{1, \dotsc, r}(x_1, \dotsc, x_r) =
+    n! f(x_1) \dotsm f(x_r) \frac{(1-F(x_r))^{n-r}}{(n-r)!}
+\)\\
+\(
+  f_{k, \dotsc, r}(x_k, \dotsc, x_r) =
+    n! \frac{F(x_k)^{k-1}}{(k-1)!} f(x_k) \dotsm
+\)\\
+\(\quad f(x_r) \frac{(1-F(x_r))^{n-r}}{(n-r)!}\)\\
+\(
+  f_k(x) = \frac{n!}{(k-1)!(n-k)!}f(x)F(x)^{k-1}\left(1-F(x)\right)^{n-k}
+\)\\
+\(
+  f_{k, r}(x_k, x_r) =
+    n! \frac{f(x_k)F(x_k)^{k-1}}{(k-1)!} \cdot
+    \frac{\left(F(x_r)-F(x_k)\right)^{r-k-1}}{(r-k-1)!} \cdot
+    \frac{f(x_r)(1-F(x_r))^{n-r}}{(n-r)!}
+\)\\
+\(
+  f_1(x) = nf(x)\left(1-F(x)\right)^{n-1}
+\)\\
+\(
+  f_n(x) = nf(x)F(x)^{n-1}
+\)
+
+\subsection*{Multinomial, \textnormal{Multinomial}\((n, p\textnormal{'s})\)}
+Usually occurs in situations \textbf{with replacement}.\\
+Parameters:
+\begin{itemize}
+  \item \(n\) number of trials (in \integers)
+  \item \(p_1, \dotsc, p_r\) event probabilities (\(\sum p_i = 1\))
+\end{itemize}
+pdf:\\
+\(
+  p(x) =
+  \begin{cases}
+    \binom{n}{x_1, \dotsc, x_r} p_1^{x_1} \dotsm p_r^{x_r},
+    & \text{if } x\text{'s} \in \integers_{\ge 0}\; \& \sum_{i=1}^r x_i = n\\
+    0, & \text{otherwise}
+  \end{cases}
+\)\\
+where \(\binom{n}{x_1, \dotsc, x_r} = \frac{n!}{x_1! \dotsm x_n!}\)
+
+\subsection*{Exponential, \textnormal{Exp}\((\lambda)\)}
+\(
+  f(x) =
+  \begin{cases}
+    \lambda e^{-\lambda x}, & \text{if } x \in \reals_{\ge 0}\\
+    0, & \text{otherwise}
+  \end{cases}
+\)\\
+\(E[X] = \frac{1}{\lambda}\)\\
+\(\text{Var}(X) = \frac{1}{\lambda^2}\)
+
+\subsection*{Uniform, \textnormal{Uniform}\((a, b)\)}
+\(
+  f(x) =
+  \begin{cases}
+    \frac{1}{b-a}, & \text{if } x \in [a, b]\\
+    0, & \text{otherwise}
+  \end{cases}
+\)\\
+\(E[X] = \frac{a+b}{2}\)\\
+\(\text{Var}(X) = \frac{(b-a)^2}{12}\)
+
+\subsection*{Standard Uniform, \textnormal{Uniform}\((0, 1)\)}
+\(
+  f(x) =
+  \begin{cases}
+    1, & \text{if } x \in [0, 1]\\
+    0, & \text{otherwise}
+  \end{cases}
+\)
+
+\subsection*{Normal, \(N(\mu, \sigma^2)\)}
+\(f(x) = \frac{1}{\sigma\sqrt{2\pi}}
+  e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2},
+  \quad \text{for } x \in \reals
+\)
+
+\subsection*{Standard Normal, \(N(0, 1)\)}
+\(
+  f(x) = \frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}},
+  \quad \text{for } x \in \reals
+\)
+
+\subsection*{Gamma, \textnormal{Gamma}\((r, \lambda)\)}
+\(
+  f(x) =
+  \begin{cases}
+    \frac{\lambda^r}{\Gamma(r)} x^{r-1} e^{-\lambda x},
+    & \text{if } x \in \reals_{>0}\\
+    0,
+    & \text{otherwise}
+  \end{cases}
+\),\\
+where\\
+\(\Gamma(r) = \int_0^\infty y^{r-1}e^{-y} \dd{y}, \quad\) for \(r > 0\),\\
+\(\Gamma(0) = 1\),\\
+\(\Gamma(\frac{1}{2}) = \sqrt{\pi}\),\\
+\(\Gamma(r) = (r-1)\Gamma(r-1), \quad r \in \reals{>0}\),\\
+\(\Gamma(r) = (r-1)!, \quad r \in \integers_{>0}\),\\
+\(E[X^k] = \frac{(r+k-1) \dotsm r}{\lambda^k}\),\\
+\(E[X] = \frac{r}{\lambda}\),\\
+\(\text{Var}(X) = \frac{r}{\lambda^2}\)
+
+\subsection*{Chi-squared,
+\(\chi_n^2 \sim \textnormal{Gamma}\left(\frac{n}{2}, \frac{1}{2}\right)\)}
+\(
+  f(x) =
+  \begin{cases}
+    \frac{\left(\frac{1}{2}\right)^{\frac{n}{2}}}{\Gamma\left(\frac{n}{2}\right)}
+      x^{\frac{n}{2}-1} e^{-\frac{x}{2}},
+    & \text{if } x \in \reals_{>0}\\
+    0, & \text{otherwise}
+  \end{cases}
+\)
+
+\subsection*{Beta, \textnormal{Beta}\((\alpha, \beta)\)}
+\(
+  f(x) =
+  \begin{cases}
+    \frac{x^{\alpha-1} (1-x)^{\beta-1}}{B(\alpha, \beta)},
+    & \text{if } x \in (0, 1)\\
+    0, & \text{otherwise}
+  \end{cases}
+\)\\
+where\\
+\(
+  B(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}
+  = \int_0^1 v^{\alpha-1}(1-v)^{\beta-1} \dd{v}
+\)
+
+\subsection*{Relationships between distributions}
+\begin{itemize}
+  \item \(X \sim N(0,1) \implies
+    X^2 \sim \text{Gamma}(\frac{1}{2}, \frac{1}{2}) \sim \chi_1^2\)
+  \item \(X_j \sim \text{Gamma}(r_j, \lambda) \implies
+    \sum X_j \sim \text{Gamma}(\sum r_j, \lambda)\)
+  \item The above two points imply that \(\sum X_j^2 \sim \chi_n^2\)
+  \item \(X_i \sim \text{Exp}(\lambda) \implies \sum_{i=1}^n X_i \sim
+    \text{Gamma}(n, \lambda)\)
+\end{itemize}

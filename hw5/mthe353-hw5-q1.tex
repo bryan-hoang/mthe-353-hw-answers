@@ -1,0 +1,51 @@
+\documentclass[hwnumber=5,studentnumber=20053722]{mthe353answer}
+
+\begin{document}
+  \begin{questions}
+    \setcounter{question}{0}
+    \question{}
+    A coin, having probability \(p\)  of coming up heads, is successively flipped
+    until at least one head and one tail have been flipped.
+    \begin{parts}
+      \part{}
+      Find the expected number of flips needed.
+      \begin{solution}
+        Let
+        \begin{align*}
+          W &= \text{\# of flips until one heads and one tails come up}\\
+          X &= \begin{cases}
+            1, & \text{if the first flip is heads}\\
+            0, & \text{if the first flip is tails}
+          \end{cases}\\
+          Y &= \text{\# of flips until one head comes up} \implies
+            Y \sim \text{Geometric}(p)\\
+          Z &= \text{\# of flips until one tails comes up} \implies
+            Z \sim \text{Geometric}(1-p)
+        \end{align*}
+        Then by the law of total expectations,
+        \begin{align*}
+          \expect{W} &= \expect{\expect{W | X}}\\
+          &= \expect{W|X=0}\prob{X=0} + \expect{W|X=1}\prob{X=1}\\
+          &= (1 + \expect{Y})(1-p) + (1 + \expect{Z})(p)\\
+          &= \left(1 + \frac{1}{p}\right)(1-p) + \left(1+\frac{1}{1-p}\right)p\\
+          &= 1 + \frac{1}{p} -p -1 + p + \frac{p}{1-p}\\
+          &= \frac{1}{p} + \frac{p}{1-p}\\
+          \alignedbox{= \frac{p^2 - p + 1}{p(1-p)}}
+        \end{align*}
+      \end{solution}
+      \part{}
+      Find the expected number of flips that land on heads.
+      \begin{solution}
+        Let \(X\) and \(Z\) be defined as above and let \(V\) be the number of
+        heads flipped. Then by the law of total expectation, we have
+        \begin{align*}
+          \expect{V} &= \expect{\expect{V|X}}\\
+          &= \expect{V|X=0}\prob{X=0} + \expect{V|X=1}\prob{X=1}\\
+          &= (1)(1-p) + (\expect{Z})(p)\\
+          &= (1-p) + \frac{p}{1-p}\\
+          \alignedbox{=\frac{p^2 - p + 1}{1-p}}
+        \end{align*}
+      \end{solution}
+    \end{parts}
+  \end{questions}
+\end{document}
