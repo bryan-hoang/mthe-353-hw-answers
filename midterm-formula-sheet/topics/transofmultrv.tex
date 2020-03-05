@@ -1,0 +1,19 @@
+\section{Transformation of Multiple Random Variables}
+Let \(h: \reals^n \to \reals^n\) be cont.\ diff.\ and \textbf{one-to-one
+(injective/invertible)} with a cont.\ diff.\ inverse.
+
+We want to find \(\mathbf{Y}=(h\text{'s})^T\).\\
+\(
+  f_Y(y_1, \dotsc, y_n) = f(g_1(y_1, \dotsc, y_n), \dotsc,
+    g_n(y_x, \dotsc, y_n)) \abs{J_g(y_1, \dotsc, y_n)}
+\)\\
+where\\
+\(
+  J_g(y_1, \dotsc, y_n) =
+  \begin{vmatrix}
+    \pdv{g_1}{y_1} & \cdots & \pdv{g_1}{y_n}\\
+    \vdots & \ddots & \vdots\\
+    \pdv{g_n}{y_1} & \cdots & \pdv{g_n}{y_n}\\
+  \end{vmatrix}\\
+\)\\
+Note the support of its joint pdf.

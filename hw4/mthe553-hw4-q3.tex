@@ -11,7 +11,7 @@
       \part{}
       Finding \(g_n(x)\).
       \begin{solution}
-        Let \(Y_n = g_n(x) = nX_{k}\). To find the pdf of \(Y_n\), let's compute
+        Let \(Y_n = g_n(x) = nX_{(k)}\). To find the pdf of \(Y_n\), let's compute
         the cdf of \(Y_n\). With \(F_k\) as the cdf of the order statistic
         \(X_{(k)}\), then
         \begin{align*}
@@ -19,10 +19,12 @@
           &= P(nX_{(k)} \le y)\\
           &= P\left(X_{(k)} \le \frac{y}{n}\right)\\
           &= F_k\left(\frac{y}{n}\right)
-          \intertext{With \(f_k\) as the marginal pdf of the order statistic
-            \(X_{(k)}\), and \(f\) and \(F\) as the common pdf and cdf of the
-            \(X_i\)'s, respectively, it follows that the pdf of \(Y_n\) (and
-            equivalently of \(g_n(x)\)) is}
+        \end{align*}
+          With \(f_k\) as the marginal pdf of the order statistic
+          \(X_{(k)}\), and \(f\) and \(F\) as the common pdf and cdf of the
+          \(X_i\)'s, respectively, it follows that the pdf of \(Y_n\) (and
+          equivalently of \(g_n(x)\)) is
+        \begin{align*}
           f_{g_n}(y) &= f_{Y_n}(y)\\
           &= \pdv{y} F_k\left(\frac{y}{n}\right)\\
           &= \frac{1}{n} f_k\left(\frac{y}{n}\right)\\
@@ -79,18 +81,18 @@
               &=\begin{cases}
                   \frac{1}{\Gamma(k)}\,x^{k-1} \limit{n}{\infty}
                     \frac{(n-1) \dots (n-k+1)}{n^{k-1}} \left(1+\frac{(-x)}{n}\right)^n
-                    \left(1-\frac{x}{n}\right)^{-k}, & \text{if } x \in (0,n) \\
+                    \left(1-\frac{x}{n}\right)^{-k}, & \text{if } x \in \limit{n}{\infty} (0,n)\\
                   0, & \text{otherwise}
-                \end{cases}\\
+                \end{cases}
+              \shortintertext{Please excuse my notation for the support of the function.}
               &=\begin{cases}
                   \frac{1}{\Gamma(k)}\,x^{k-1} \limit{n}{\infty}
                     \frac{(n-1) \dots (n-k+1)}{n^{k-1}}
                     \limit{n}{\infty} \left(1+\frac{(-x)}{n}\right)^n
                     \limit{n}{\infty} \left(1-\frac{x}{n}\right)^{-k},
-                    & \text{if } x \in \limit{n}{\infty} (0,n) \\
+                    & \text{if } x \in (0,\infty) \\
                   0, & \text{otherwise}
-                \end{cases}
-              \shortintertext{Please excuse my notation for the support of the function.}
+                \end{cases}\\
               &=\begin{cases}
                   \frac{1}{\Gamma(k)}\,x^{k-1} \left(1\right)
                     \left(e^{-x}\right)
