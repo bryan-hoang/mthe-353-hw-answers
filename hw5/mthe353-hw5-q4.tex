@@ -1,11 +1,50 @@
-\documentclass[hwnumber=5,studentnumber=20053722]{mthe353answer}
+\documentclass[%
+  hwnumber=5,%
+  studentnumber=20053722,%
+  {name=Bryan Hoang}%
+]{%
+  mthe353answer%
+}
 
 \begin{document}
   \begin{questions}
     \setcounter{question}{3}
     \question{}
     \begin{solution}
-      Foo
+      The first jump from the \(j\)th best vertex has an equal probability of
+      \(\frac{1}{j-1}\) to land on any of the other \(j-1\) better vertices
+      where those vertices have their expected number of jumps to reach \(B\).
+      Then we have the following recursive relationship:
+      \begin{align*}
+        M_j &= 1 + \frac{1}{j-1}(M_{j-1} + \dotsb + M_2 + M_1)
+        \intertext{where \(M_1 = 0\) and \(M_2 = 1\)}
+        &= 1 + \frac{1}{j-1} \sum_{i=2}^{j-1} M_i \label{eq:recursive} \numberthis
+      \end{align*}
+      Let \(P(j)\) be the statement that \(M_j = \sum_{i=1}^{j-1} \frac{1}{i}\) for \(j \in
+      \integers_{\ge 2}\). We will prove \(P(j)\) by strong induction.
+      \begin{proof} (Strong Induction)\\
+        \emph{Base case}: For \(j = 2\), it is clear that
+        \begin{align*}
+          M_2 = 1 = \frac{1}{1}
+        \end{align*}
+        Thus, \(P(j)\) is true for \(j = 2\).\\
+        \emph{Inductive step}: Suppose \(P(j)\) is true \(\forall j \in \{2, \dotsc, k\}\) for
+        some \(k \in \integers_{\ge 2}\). Then
+        \begin{align*}
+          M_{k+1} &= 1 + \frac{1}{k} \sum_{i=2}^{k} M_i
+            && \text{by~\eqref{eq:recursive}}\\
+          &= 1 + \frac{1}{k} \sum_{i=2}^{k} \left(\sum_{m=1}^{i-1} \frac{1}{m}\right)
+            && \text{by the inductive hypothesis}\\
+          &= 1 + \frac{1}{k}\left((k-1)\frac{1}{1} + (k-2)\frac{1}{2} + \dotsb + \frac{1}{k-1}\right)\\
+          &= 1 + \frac{1}{k}\left(\sum_{i=1}^{k-1} \frac{k-i}{i}\right)\\
+          &= 1 + \frac{1}{k}\left(\left(k\sum_{i=1}^{k-1} \frac{1}{i}\right) - (k-1)\right)\\
+          &= 1 + \sum_{i=1}^{k-1} \frac{1}{i} - 1 + \frac{1}{k}\\
+          &= \sum_{i=1}^k \frac{1}{i}
+        \end{align*}
+        Since both the base case and inductive step have been performed, then by
+        mathematical induction, the statement \(P(j)\) holds
+        for all \(j \in \integers_{\ge 2}\).
+      \end{proof}
     \end{solution}
   \end{questions}
 \end{document}

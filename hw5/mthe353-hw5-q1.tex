@@ -17,12 +17,12 @@
             1, & \text{if the first flip is heads}\\
             0, & \text{if the first flip is tails}
           \end{cases}\\
-          Y &= \text{\# of flips until one head comes up} \implies
-            Y \sim \text{Geometric}(p)\\
-          Z &= \text{\# of flips until one tails comes up} \implies
-            Z \sim \text{Geometric}(1-p)
+          Y &= \text{\# of flips until one head comes up starting from the second flip}\\
+            \implies Y &\sim \text{Geometric}(p)\\
+          Z &= \text{\# of flips until one tails comes up starting from the second flip}\\
+            \implies Z &\sim \text{Geometric}(1-p)
         \end{align*}
-        Then by the law of total expectations,
+        Then by the law of total expectation,
         \begin{align*}
           \expect{W} &= \expect{\expect{W | X}}\\
           &= \expect{W|X=0}\prob{X=0} + \expect{W|X=1}\prob{X=1}\\

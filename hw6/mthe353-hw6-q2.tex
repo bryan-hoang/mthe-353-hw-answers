@@ -1,0 +1,76 @@
+\documentclass[%
+  hwnumber=6,%
+  studentnumber=20053722,%
+  {name=Bryan Hoang}%
+]{%
+  mthe353answer%
+}
+
+\begin{document}
+  \begin{questions}
+    \setcounter{question}{1}
+    \question{}
+    \begin{solution}
+      Firstly, we know that \(X_{(1)} \sim \Beta(1,n)\) and \(X_{(n)} \sim \Beta(n,1)\).
+      Then the marginal and joint pdfs of \(X_{(1)}\) and \(X_{(n)}\) are
+        \begin{align*}
+          f_1(x) &= \begin{cases}
+            \frac{1}{B(1,n)} x^{1-1}(1-x)^{n-1}, & \text{if}\ x \in (0,1)\\
+            0, & \text{otherwise}
+          \end{cases}\\
+          &= \begin{cases}
+            n(1-x)^{n-1} , & \text{if}\ x \in (0,1)\\
+            0, & \text{otherwise}
+          \end{cases}\\
+          f_n(x) &= \begin{cases}
+            \frac{1}{B(n,1)} x^{n-1}(1-x)^{1-1}, & \text{if}\ x \in (0,1)\\
+            0, & \text{otherwise}
+          \end{cases}\\
+          &= \begin{cases}
+            n x^{n-1}, & \text{if}\ x \in (0,1)\\
+            0, & \text{otherwise}
+          \end{cases}\\
+          f_{1,n}(x_1,x_n) &= n! \frac{f(x_1)F(x_1)^{1-1}}{(1-1)!}
+            \cdot \frac{(F(x_n)-F(x_1))^{n-1-1}}{(n-1-1)!}
+            \cdot \frac{f(x_n)(1-F(x_n))^{n-n}}{(n-n)!}\\
+           &= \begin{cases}
+            n(n-1) (x_n-x_1)^{n-2}, & \text{if}\ x \in (0,1)\\
+            0, & \text{otherwise}
+           \end{cases}
+        \end{align*}
+        The expectations and variances of \(X_{(1)}\) and \(X_{(n)}\) are
+        \begin{align*}
+          \E{X_{(1)}} &= \frac{1}{n+1}\\
+          \E{X_{(n)}} &= \frac{n}{n+1}\\
+          \Var{X_{(1)}} &= \frac{n}{(n+2)(n+1)^2}\\
+          \Var{X_{(n)}} &= \frac{n}{(n+2)(n+1)^2}
+        \end{align*}
+        We also have
+        \begin{align*}
+          \E{X_{(1)}X_{(n)}} &= \int_0^1 \int_0^{x_n} x_1 x_n f_{1,n}(x_1,x_n) \dd{x_1} \dd{x_n}\\
+          &= \int_0^1 \int_0^{x_n} x_1 x_n n(n-1) (x_n-x_1)^{n-2} \dd{x_1} \dd{x_n}
+          \intertext{Let \(u = \frac{x_1}{x_n} \implies \dd{u} = \frac{1}{x_n}\dd{x_1}\). Then}
+          \E{X_{(1)}X_{(n)}} &= \int_0^1 \int_0^1 u x_n x_n n(n-1) x_n^{n-2} (1-u)^{n-2} x_n \dd{u} \dd{x_n}\\
+          &= n(n-1) \int_0^1 x_n^{n+1} \int_0^1 \underbrace{u(1-u)^{n-2}}_I \dd{u} \dd{x_n}
+          \intertext{where \(I = B(2, n-1)f(x)\), with \(f(x)\) being tha pdf of
+          a \(\Beta(2,n-1)\) random variable.}
+          \implies \E{X_{(1)}X_{(n)}} &= n(n-1) B(2,n-1) \int_0^1 x_n^{n+1} \dd{x_n}\\
+          &= n(n-1) \frac{\Gamma(2)\Gamma(n-1)}{\Gamma(n+1)} \cdot \frac{1}{n+2}\\
+          &= \frac{n(n-1)}{n+2} \cdot \frac{1!(n-2)!}{n!}\\
+          &= \frac{1}{n+2}
+        \end{align*}
+        Then
+        \begin{align*}
+          \cov(X_{(1)}X_{(n)}) &= \E{X_{(1)}X_{(n)}} - \E{X_{(1)}} \E{X_{(n)}}\\
+          &= \frac{1}{n+2} - \frac{1}{n+1} \cdot \frac{n}{n+1}\\
+          &= \frac{1}{(n+2)(n+1)^2}
+        \end{align*}
+        Therefore, the correlation coefficient between \(X_{(1)}\) and \(X_{(n)}\) is
+        \begin{align*}
+          \rho(X_{(1)}X_{(n)}) &= \frac{\cov(X_{(1)}X_{(n)})}{\sqrt{\Var{X_{(1)}}\Var{X_{(n)}}}}\\
+          &= \frac{\frac{1}{(n+2)(n+1)^2}}{\left(\frac{n}{(n+2)(n+1)^2}\right)}\\
+          \alignedbox{= \frac{1}{n}}
+        \end{align*}
+    \end{solution}
+  \end{questions}
+\end{document}

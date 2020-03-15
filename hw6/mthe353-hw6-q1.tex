@@ -1,0 +1,33 @@
+\documentclass[%
+  hwnumber=6,%
+  studentnumber=20053722,%
+  {name=Bryan Hoang}%
+]{%
+  mthe353answer%
+}
+
+\begin{document}
+  \begin{questions}
+    \setcounter{question}{0}
+    \question{}
+    \begin{solution}
+      \begin{proof}
+        To prove the equality, we shall start with the RHS\@.
+        \begin{align*}
+          \text{RHS} &= \E{\cov(X_1, X_2)|Y} + \cov(\E{X_1|Y}, \E{X_2|Y})\\
+          \begin{split}
+            &= \E{\E{X_1 X_1|Y} - \E{X_1|Y}\E{X_2|Y}} + \E{\E{X_1|Y}\E{X_2|Y}}\\
+            & \phantom{{}={}} - \E{\E{X_1|Y}}\E{\E{X_2|Y}}
+          \end{split}\\
+          &= \E{\E{X_1 X_1|Y}} - \E{\E{X_1|Y}\E{X_2|Y}}
+            + \E{\E{X_1|Y}\E{X_2|Y}} - \E{X_1}\E{X_2}
+          \shortintertext{by the linearity of expectation and the law of total expectation}
+          &= \E{X_1 X_1} - \E{X_1}\E{X_2}
+          \shortintertext{by the law of total expectation}
+          &= \cov(X_1 X_2)\\
+          &= \text{LHS} \qedhere
+        \end{align*}
+      \end{proof}
+    \end{solution}
+  \end{questions}
+\end{document}
