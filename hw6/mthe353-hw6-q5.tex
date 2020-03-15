@@ -1,0 +1,35 @@
+\documentclass[%
+  hwnumber=6,%
+  studentnumber=20053722,%
+  {name=Bryan Hoang}%
+]{%
+  mthe353answer%
+}
+
+\begin{document}
+  \begin{questions}
+    \setcounter{question}{4}
+    \question{}
+    \begin{solution}
+      \begin{proof}
+        Firstly, we know that \(\E{X} = \E{Y} = 0\) and \(\Var{X} = \Var{Y} = 1\).
+        Then we have that \(\E{X^2} = \E{Y^2} = 1\) and \(\cov(X,Y) = \E{XY}
+        \implies \rho(X,Y) = \E{XY}\).
+
+        To prove the inequality, we observe that
+        \begin{align*}
+          \E{\max(X^2,Y^2)} &= \E*{\frac{1}{2}(X^2+Y^2)+\frac{1}{2}\abs{(X-Y)(X+Y)}}\\
+          &= \E*{\frac{1}{2}(X^2+Y^2)} + \E*{\frac{1}{2}\abs{(X-Y)(X+Y)}}\\
+          &= \frac{1}{2} (\E{X^2}+\E{Y^2}) + \frac{1}{2}\E{\abs{X-Y}\cdot\abs{X+Y}}\\
+          &\le 1 + \frac{1}{2}\sqrt{\E{\abs{X-Y}^2}\E{\abs{X+Y}^2}}
+          \intertext{by the Cauchy-Schwartz inequality. Then}
+          \E{\max(X^2,Y^2)} &\le 1 + \frac{1}{2}\sqrt{(\E{X^2}-2\E{XY}+\E{Y^2})
+            (\E{X^2}+2\E{XY}+\E{Y^2})}\\
+          &= 1 + \sqrt{\frac{1}{4}(2-2\E{XY})(2+2\E{XY})}\\
+          &= 1 + \sqrt{1-\E{XY}^2}\\
+          &= 1 + \sqrt{1-\rho^2(X,Y)} \qedhere
+        \end{align*}
+      \end{proof}
+    \end{solution}
+  \end{questions}
+\end{document}

@@ -1,0 +1,62 @@
+\documentclass[%
+  hwnumber=6,%
+  studentnumber=20053722,%
+  {name=Bryan Hoang}%
+]{%
+  mthe353answer%
+}
+
+\begin{document}
+  \begin{questions}
+    \setcounter{question}{3}
+    \question{}
+    \begin{solution}
+      \begin{proof}
+        By the Cauchy-Schwartz inequality, we have that
+        \begin{equation*}
+          \abs{\cov(I_A,I_B)} \le \sqrt{\Var{I_A}\Var{I_B}}
+        \end{equation*}
+        Let's find the supremums of \(\Var{I_A}\) and \(\Var{I_B}\), which will
+        be the same since they are both indicator functions of arbitrary events
+        \(A\) and \(B\). WLOG, examining \(\Var{I_A}\) gives us
+        \begin{align*}
+          \Var{I_A} &= \E{I_A^2} - \E{I_A}^2\\
+          &= \prob{A} - \prob{A}^2
+        \end{align*}
+        since \(I_A\) is an indicator function, so \(I_A^2 = I_A\) and
+        \(\E{I_A} = \prob{A}\). We then have
+        \begin{align*}
+          \supremum[\prob{A}\in{[0,1]}]{\Var{I_A}} &= \supremum[x\in{[0,1]}]{x(1-x)}\\
+          &= \frac{1}{4}\\
+          &= \supremum[\prob{B}\in{[0,1]}]{\Var{I_B}}
+        \end{align*}
+        Thus, it follows that
+        \begin{align*}
+          \abs{\cov(I_A,I_B)} &\le \sqrt{\Var{I_A}\Var{I_B}}\\
+          &\le \sqrt{\supremum[\prob{A}\in{[0,1]}]{\Var{I_A} }\cdot \supremum[\prob{B}\in{[0,1]}]{\Var{I_B}}}\\
+          &= \sqrt{\frac{1}{4} \cdot \frac{1}{4}}\\
+          &= \frac{1}{4}\\
+          \implies \cov(I_A, I_B) &\in \left[-\frac{1}{4},\frac{1}{4}\right] \qedhere
+        \end{align*}
+        First, note that
+        \begin{align*}
+          \cov(I_A,I_B) &= \E{I_A I_B} - \E{I_A}\E{I_B}\\
+          &= \prob{A \cap B} - \prob{A}\prob{B}
+        \end{align*}
+        Now, consider rolling a fair six sided die. Let \(A = B =\) ``an odd number was rolled''.
+        Then we have
+        \begin{align*}
+          \cov(I_A,I_B) &= \prob{A \cap B} - \prob{A}\prob{B}\\
+          &= \frac{1}{2} - \frac{1}{2} \cdot \frac{1}{2}\\
+          &= +\frac{1}{4}
+        \end{align*}
+        If we let \(A\) be as above and \(B =\) ``an even number was rolled'', then
+        \begin{align*}
+          \cov(I_A,I_B) &= \prob{A \cap B} - \prob{A}\prob{B}\\
+          &= 0 - \frac{1}{2} \cdot \frac{1}{2}\\
+          &= -\frac{1}{4}
+        \end{align*}
+      \end{proof}
+    \end{solution}
+  \end{questions}
+\end{document}

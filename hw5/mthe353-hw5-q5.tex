@@ -1,11 +1,60 @@
-\documentclass[hwnumber=5,studentnumber=20053722]{mthe353answer}
+\documentclass[%
+  hwnumber=5,%
+  studentnumber=20053722,%
+  {name=Bryan Hoang}%
+]{%
+  mthe353answer%
+}
 
 \begin{document}
   \begin{questions}
     \setcounter{question}{4}
-    \question{}
-    \begin{solution}
-      Foo
-    \end{solution}
+    \question{}\
+    \begin{parts}
+      \part{}
+      \begin{solution}
+        \begin{proof}
+          Suppose that \(g(\cdot)\) is a function for which
+          \(\expect{\expect{Y|X}g(X)}\) and \(\expect{Yg(X)}\) exist. Then
+          by LOTUS, we have
+          \begin{align*}
+            \expect{\expect{Y|X}g(X)} &= \sum_x \expect{Y|X=x} \cdot g(x)
+              \cdot p_X(x)\\
+            &= \sum_x \sum_y y \cdot p_{Y|X}(y|x) \cdot g(x) \cdot p_X(x)\\
+            &= \sum_x \sum_y y \cdot \frac{p_{X,Y}(x,y)}{p_X(x)} \cdot g(x)
+              \cdot p_X(x)\\
+            &= \sum_x \sum_y y \cdot g(x) \cdot p_{X,Y}(x,y)\\
+            &= \expect{Yg(X)}
+          \end{align*}
+          by LOTUS\@.
+        \end{proof}
+      \end{solution}
+      \part{}
+      \begin{solution}
+        \begin{proof}
+          Suppose that \(\phi(\cdot)\) is a function satisfying
+          \(\expect{\phi(X)g(X)}=\expect{Yg(X)}\) for all functions \(g(\cdot)\)
+          for which the expectations exist. Then WLOG, consider the function
+          \begin{equation*}
+            g_x(X) = \begin{cases}
+              1, & \text{if}\ X=x\\
+              0, & \text{otherwise}
+            \end{cases}
+          \end{equation*}
+          Then
+          \begin{align*}
+            \expect{\phi(X)g_x(X)} &= \phi(x)
+            \intertext{and}
+            \expect{Yg_x(X)} &= \expect{Y|X=x}
+          \end{align*}
+          Therefore, we have that
+          \begin{align*}
+            \phi(x) &= \expect{Y|X=x}\\
+            \implies \phi(X) &= \expect{Y|X}
+          \end{align*}
+          with probability 1.
+        \end{proof}
+      \end{solution}
+    \end{parts}
   \end{questions}
 \end{document}

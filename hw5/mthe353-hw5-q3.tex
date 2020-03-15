@@ -4,8 +4,52 @@
   \begin{questions}
     \setcounter{question}{2}
     \question{}
+    A fair coin is tossed successively. Let \(K_n\) be the number of tosses until
+    \(n\) consecutive heads occur. Find \(\expect{K_n}\) for \(n \in \integers_{\ge} 1\).
+    Hint: Condition on \(K_{n-1}\) and use the boundary condition \(\expect{K_1}=2\).
     \begin{solution}
-      Foo
+      Looking at \(\expect{K_n|K_{n-1}=k}\), for \(k \in \integers_{\ge 1}\),
+      we have two equally likely cases on the \(k\)th flip:
+      \begin{itemize}
+        \item If the \(k+1\) flip is heads, we are done. So the expected number
+          is \(k + 1\)
+        \item If the \(k+1\) flip is tails, we `start over'. So the expected
+          number is \(k + 1 + \expect{K_n}\)
+      \end{itemize}
+      Thus, \(\expect{K_n|K_{n-1}=k} = \frac{1}{2}(k+1) + \frac{1}{2}(k+1+\expect{K_n})\).
+
+      It follows that
+      \begin{align*}
+        \expect{K_n|K_{n-1}} &= \frac{1}{2}(K_{n-1}+1) +
+          \frac{1}{2}(K_{n-1}+1+\expect{K_n})\\
+        &= K_{n-1} + 1 + \frac{1}{2}\expect{K_n}
+      \end{align*}
+      By the law of total expectation, we have
+      \begin{align*}
+        \expect{K_n} &= \expect{\expect{K_n|K_{n-1}}}\\
+        &= \expect{K_{n-1} + 1 + \frac{1}{2}\expect{K_n}}\\
+        &= \expect{K_{n-1}} + 1 + \frac{1}{2}\expect{K_n}
+      \end{align*}
+      which implies the recurrence relation \(\expect{K_n} = 2\expect{K_{n-1}} + 2\).
+
+      Solving the recurrence relation:
+      \begin{align*}
+        \expect{K_n} &= 2^1\expect{K_{n-1}} + 2(2^0)\\
+        &= 2^1(2\expect{K_{n-2}} + 2) + 2(2^0)\\
+        &= 2^2\expect{K_{n-2}} + 2(2^0 + 2^1)\\
+        &= 2^2(2\expect{K_{n-3}} +2) + 2(2^0 + 2^1)\\
+        &= 2^3\expect{K_{n-3}} + 2(2^0 + 2^1 + 2^2)\\
+        &\phantom{{}={}}\vdots\\
+        &= 2^m\expect{K_{n-m}} + 2\sum_{i=0}^{m-1} 2^i\\
+        &= 2^m\expect{K_{n-m}} + 2\left(\frac{2^m-1}{2-1}\right)\\
+        &= 2^m\expect{K_{n-m}} + 2^{m+1}-2\\
+        &\phantom{{}={}}\vdots\\
+        &= 2^{n-1}\expect{K_{n-(n-1)}} + 2^{(n-1)+1} - 2\\
+        &= 2^{n-1}\expect{K_{1}} + 2^{n} - 2\\
+        &= 2^{n-1}(2) + 2^{n} - 2\\
+        &= 2^{n-1}(2) + 2^{n} - 2\\
+        \alignedbox{= 2^{n+1} - 2, \quad \forall n \in \integers_{\ge 1}}
+      \end{align*}
     \end{solution}
   \end{questions}
 \end{document}

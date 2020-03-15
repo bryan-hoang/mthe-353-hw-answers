@@ -1,11 +1,71 @@
-\documentclass[hwnumber=5,studentnumber=20053722]{mthe353answer}
+\documentclass[%
+  hwnumber=5,%
+  studentnumber=20053722,%
+  {name=Bryan Hoang}%
+]{%
+  mthe353answer%
+}
 
 \begin{document}
   \begin{questions}
     \setcounter{question}{1}
-    \question{}
-    \begin{solution}
-      Foo
-    \end{solution}
+    \question{}\
+    \begin{parts}
+      \part{}
+      Two dice are rolled, one of which is fair and the other is
+      biased. What is the probability that the sum is 7?
+      \begin{solution}
+        Let
+        \begin{align*}
+          A &= \text{the sum is 7}\\
+          I_A &= \begin{cases}
+            1, & \text{if A occurs}\\
+            0, & \text{if A does not occur}
+          \end{cases}\\
+          Y &= \text{the \# the fair die rolls}\\
+          Z &= \text{the \# the biased die rolls}
+        \end{align*}
+        It follows that \(\prob{A} = \expect{I_A}\).
+
+        Then by the law of total probability,
+        \begin{align*}
+          \expect{I_A} &= \expect{\expect{I_A|Y}}\\
+          &= \sum_{i=1}^6 \expect{I_A|Y=i}\prob{Y=i}\\
+          &= \frac{1}{6} \sum_{i=1}^6 \prob{Z=i}
+          \intertext{where \(\{Z=i\}\), for \(i \in \{1, \dotsc, 6\}\), forms a
+            partition of the sample space. Hence, we have that
+            \(\sum_{i=1}^6 \prob{Z=i} = 1\). Therefore,}
+          \alignedbox[\prob{A}]{= \frac{1}{6}}
+        \end{align*}
+      \end{solution}
+      \part{}
+      \(n\) dice are rolled, one of which is fair and the rest are biased.  What is
+      the probability that the sum of the rolls is even?
+      \begin{solution}
+        Let
+        \begin{align*}
+          A &= \text{`the sum of the rolls is even'}\\
+          I_A &= \begin{cases}
+            1, & \text{if \(A\) occurs}\\
+            0, & \text{if \(A\) does not occur}
+          \end{cases}\\
+          Y &= \begin{cases}
+            1, & \text{if the fair die is even}\\
+            0, & \text{if the fair die is odd}
+          \end{cases}\\
+          Z &= \text{`the sum among the biased dice is even'}
+        \end{align*}
+        It follows that \(\prob{A} = \expect{I_A}\).
+
+        Then by the law of total probability,
+        \begin{align*}
+          \expect{I_A} &= \expect{\expect{I_A|Y}}\\
+          &= \expect{I_A|Y=0}\prob{Y=0} + \expect{I_A|Y=1}\prob{Y=1}\\
+          &= \prob*{Z^\complement}\left(\frac{1}{2}\right) + \prob{Z}\left(\frac{1}{2}\right)\\
+          &= \frac{1}{2}(\prob*{Z^\complement}+1-\prob*{Z^\complement})\\
+          \alignedbox[\implies \prob{A}]{= \frac{1}{2}}
+        \end{align*}
+      \end{solution}
+    \end{parts}
   \end{questions}
 \end{document}

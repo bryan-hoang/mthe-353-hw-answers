@@ -1,0 +1,46 @@
+\documentclass[%
+  hwnumber=6,%
+  studentnumber=20053722,%
+  {name=Bryan Hoang}%
+]{%
+  mthe353answer%
+}
+
+\begin{document}
+  \begin{questions}
+    \setcounter{question}{2}
+    \question{}
+    \begin{solution}
+      For the covariance between \(X_k\) and \(X_{k+m}\), we have
+      \begin{align*}
+        \cov(X_k,X_{k+m}) &= \cov(\sum_{i=1}^k Y_i,\sum_{j=1}^{k+m} Y_j)\\
+        &= \sum_{i=1}^k \sum_{j=1}^{k+m} \cov(Y_i,Y_j)
+        \intertext{Since each \(Y_l\) is independent, \(\cov(Y_i,Y_j)\) is only
+        non-zero when \(i=j\). Thus,}
+        \cov(X_k,X_{k+m}) &= \sum_{i=1}^k \cov(Y_i,Y_i)\\
+        \alignedbox{= k\sigma^2}
+      \end{align*}
+      The variances of \(X_k\) and \(X_{k+m}\) are
+      \begin{align*}
+        \Var{X_k} &= \Var{\sum_{i=1}^k Y_i}\\
+        &= \sum_{i=1}^k \Var{Y_i}\\
+        &= k\sigma^2\\
+        \Var{X_{k+m}} &= \Var{\sum_{i=1}^{k+m} Y_i}\\
+        &= \sum_{i=1}^{k+m} \Var{Y_i}\\
+        &= (k+m)\sigma^2
+      \end{align*}
+      Thus, the correlation coefficient between \(X_k\) and \(X_{k+m}\) is
+      \begin{align*}
+        \rho(X_k,X_{k+m}) &= \frac{\cov(X_k,X_{k+m})}{\sqrt{\Var{X_k}\Var{X_{k+m}}}}\\
+        &= \frac{k\sigma^2}{\sqrt{k\sigma^2 \cdot (k+m)\sigma^2}}\\
+        \alignedbox{= \sqrt{\frac{k}{k+m}}}
+      \end{align*}
+      As \(m \to \infty\), we see that
+      \begin{align*}
+        & \inviseq \limit{m}{\infty} \cov(X_k,X_{k+m}) & & \inviseq \limit{m}{\infty} \rho(X_k,X_{k+m})\\
+        &= \limit{m}{\infty} k\sigma^2 & &= \limit{m}{\infty} \sqrt{\frac{k}{k+m}}\\
+        \alignedbox{= k\sigma^2} & \alignedbox{= 0}
+      \end{align*}
+    \end{solution}
+  \end{questions}
+\end{document}
