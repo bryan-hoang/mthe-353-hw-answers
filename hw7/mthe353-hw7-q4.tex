@@ -1,0 +1,46 @@
+\documentclass[%
+  hwnumber=7,%
+  studentnumber=20053722,%
+  {name=Bryan Hoang}%
+]{%
+  mthe353answer%
+}
+
+\begin{document}
+  \begin{questions}
+    \setcounter{question}{3}
+    \question{}
+    \begin{solution}
+      \begin{proof}
+        Let \(a \in [0, M)\) and \(A = \{X \ge a\}\). Then we claim that
+        \begin{equation}
+          \label{eq:upper bound}
+          X \le M I_A + aI_{A^C}
+        \end{equation}
+        The inequality in~\eqref{eq:upper bound} is true since if \(I_A = 1\), then the
+        inequality becomes
+        \begin{equation*}
+          X \le M = M(1) + a(0)
+        \end{equation*}
+        which is true by the hypothesis about \(X\). If \(I_{A^C} = 1\), then
+        the inequality becomes
+        \begin{equation*}
+          X < a = M(0) + a(1)
+        \end{equation*}
+        which is true when \(I_{A^C} = 1\).
+
+        By taking the expectations of both sides of~\eqref{eq:upper bound}, we
+        see that
+        \begin{align*}
+          \E{X} &\le \E{M I_A + aI_{A^C}}\\
+          \E{X} &\le M \E{I_A} + a \E{I_{A^C}}
+          \intertext{by the linearity of expectation. Then}
+          \E{X} &\le M \prob{X \ge a} + a \prob{X < a}\\
+          \E{X} &\le M \prob{X \ge a} + a - a \prob{X \ge a}\\
+          \implies \prob{X \ge a}(M - a) & \ge \E{X} - a\\
+          \prob{X \ge a} &\ge \frac{\E{X} - a}{M - a} \qedhere
+        \end{align*}
+      \end{proof}
+    \end{solution}
+  \end{questions}
+\end{document}
