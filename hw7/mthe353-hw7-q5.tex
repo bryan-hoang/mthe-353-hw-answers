@@ -1,0 +1,48 @@
+\documentclass[%
+  hwnumber=7,%
+  studentnumber=20053722,%
+  {name=Bryan Hoang}%
+]{%
+  mthe353answer%
+}
+
+\begin{document}
+  \begin{questions}
+    \setcounter{question}{4}
+    \question{}
+    \begin{solution}
+      \begin{proof}
+        Let \(M \in \reals_{>0}\) be such that \(\sigma_i^2 < M\) for all \(i \ge 1\).
+        First,
+        \begin{align*}
+          \E{\overline{X}_n} &= \E*{\frac{1}{n}\sum_{i=1}^n X_i}\\
+          &= \frac{1}{n} \sum_{i=1}^n \E{X_i} && \text{by the linearity of expectation}\\
+          &= \frac{1}{n} \sum_{i=1}^n \mu && \text{since \(\E{X_i} = \mu\) by the premises}\\
+          &= \frac{1}{n} \cdot n \cdot \mu\\
+          &= \mu \numberthis\label{eq:mean}
+        \end{align*}
+        We also have
+        \begin{align*}
+          \Var{\overline{X}_n} &= \Var{\frac{1}{n} \sum_{i=1}^n X_i}\\
+          &= \frac{1}{n^2} \sum_{i=1}^n \Var{X_i}\\
+          &= \frac{1}{n^2} \sum_{i=1}^n \sigma_i^2\\
+          &\le \frac{1}{n^2} \sum_{i=1}^n M && \text{by assumption}\\
+          &= \frac{1}{n^2} \cdot n \cdot M\\
+          &= \frac{M}{n} \numberthis\label{eq:var}
+        \end{align*}
+        Then
+        \begin{align*}
+          \prob{|\overline{X}_n - \mu| > \varepsilon} &=
+            \prob{|\overline{X}_n - \E{X_n}| > \varepsilon}
+            && \text{by~\eqref{eq:mean}}\\
+          &\le \frac{\Var{\overline{X}_n}}{\varepsilon^2} && \text{by Chebyshev’s inequality}\\
+          &\le \frac{1}{\varepsilon^2} \cdot \frac{M}{n}
+            && \text{by~\eqref{eq:var}}
+        \end{align*}
+        Since \(\limit{n}{\infty} \frac{1}{\varepsilon^2} \cdot \frac{M}{n} = 0\),
+        it follows that \(\limit{n}{\infty} \prob{|\overline{X}_n - \mu| > \varepsilon} = 0\).
+        Therefore, \(\overline{X}_n \xrightarrow{p} \mu\).
+      \end{proof}
+    \end{solution}
+  \end{questions}
+\end{document}

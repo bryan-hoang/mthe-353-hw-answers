@@ -1,0 +1,78 @@
+\documentclass[%
+  hwnumber=7,%
+  studentnumber=20053722,%
+  {name=Bryan Hoang}%
+]{%
+  mthe353answer%
+}
+
+\begin{document}
+  \begin{questions}
+    \setcounter{question}{2}
+    \question{}\
+    \begin{parts}
+      \part{}
+      Suppose \(X\) is a non-negative random variable with \(\prob{X \ge 10} = 0.1\).
+      What is the smallest possible value of \(\E{X}\)?  Give a distribution for
+      \(X\) under which the mean of \(X\) achieves this smallest value.
+      \begin{solution}
+        By Markov's inequality, we have that
+        \begin{align*}
+          \prob{X \ge 10} &\le \frac{\E{X}}{10}\\
+          0.1 &\le \frac{\E{X}}{10}\\
+          \alignedbox[\implies \E{X}]{\ge 1}
+        \end{align*}
+        Let \(X\) have a distribution such that takes that value 0 with
+        probability \(\frac{9}{10}\) and the value 10 with probability
+        \(\frac{1}{10}\). Then \(\prob{X \ge 10} = \prob{X = 10} = 0.1\). By
+        Markov's inequality, we have that \(\E{X} \ge 1\). But we also have
+        \(\E{X} = 0 \cdot \frac{9}{10} + 10 \cdot \frac{1}{10} = 1\) as desired.
+      \end{solution}
+      \part{}
+      We have shown that if \(X\) is a random variable with mean \(\mu\) and
+      variance \(\sigma^2\), where \(\sigma^2 < \infty\), then
+      \(\prob{|X-\mu|\ge k\sigma} \le \frac{1}{k^2}\) for any positive integer
+      \(k\), using Chebyshev's inequality. For any positive integer \(k\), give
+      a distribution for \(X\) that satisfies
+      \(\prob{|X-\mu|\ge k\sigma} = \frac{1}{k^2}\).
+      \begin{solution}
+        Let
+        \begin{equation*}
+          X = \begin{cases}
+            -1, & \text{with probability \(\frac{1}{2k^2}\)}\\
+            0, & \text{with probability \(1-\frac{1}{k^2}\)}\\
+            1, & \text{with probability \(\frac{1}{2k^2}\)}
+          \end{cases}
+        \end{equation*}
+        Then the mean of \(X\) is
+        \begin{align*}
+          \mu &= \E{X}\\
+          &= -1 \cdot \frac{1}{2k^2} + 0 \cdot \left(1-\frac{1}{k^2}\right) + 1 \cdot \frac{1}{2k^2}\\
+          &= 0
+        \end{align*}
+        The second moment of X is
+        \begin{align*}
+          \E{X^2} &= (-1)^2 \cdot \frac{1}{2k^2} + 0^2 \cdot
+            \left(1-\frac{1}{k^2}\right) + 1^2 \cdot \frac{1}{2k^2}\\
+          &= \frac{1}{k^2}
+        \end{align*}
+        Then the variance of \(X\) is
+        \begin{align*}
+          \sigma^2 &= \Var{X}\\
+          &= \E{X^2} - \E{X}^2\\
+          &= \frac{1}{k^2}
+        \end{align*}
+        Thus, we have that
+        \begin{align*}
+          \prob{|X-\mu|\ge k\sigma} &= \prob{|X - 0| \ge k \cdot \frac{1}{k}}\\
+          &= \prob{|X| \ge 1}\\
+          &= \prob{|X| = 1}\\
+          &= \prob{X = -1} + \prob{X = 1}\\
+          &= \frac{1}{2k^2} + \frac{1}{2k^2}\\
+          &= \frac{1}{k^2}
+        \end{align*}
+        as desired.
+      \end{solution}
+    \end{parts}
+  \end{questions}
+\end{document}

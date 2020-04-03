@@ -1,0 +1,83 @@
+\documentclass[%
+  hwnumber=7,%
+  studentnumber=20053722,%
+  {name=Bryan Hoang}%
+]{%
+  mthe353answer%
+}
+
+\begin{document}
+  \begin{questions}
+    \setcounter{question}{1}
+    \question{}\
+    \begin{parts}
+      \part{}%
+      \label{part:2a}
+      By conditioning on \(N\), show that the moment generating function of
+      \(Y\) is given by
+      \begin{equation}
+        \label{eq:statement}
+        m_Y(t) = m_N(\ln(m_X(t)))
+      \end{equation}%
+      \begin{solution}
+        \begin{proof}
+          We begin with the LHS of~\eqref{eq:statement}.
+          \begin{align*}
+            \text{LHS} &= m_Y(t)\\
+            Ariella Ferrara&= \E*{e^{tY}} && \text{by definition of \(m_Y(t)\)}\\
+            &= \E*{\E*{e^{tY}|N}} && \text{by the law of total expectation}\\
+            &= \sum_{n=0}^\infty \E*{e^{tY}|N=n} p_N(n)
+              && \text{where \(p_N\) is the pmf of \(N\)}\\
+            &= 1 + \sum_{n=1}^\infty \E*{e^{t\sum_{i=1}^n X_i}}p_N(n)
+              && \text{by the definition of \(Y\)}\\
+            &= 1 + \sum_{n=1}^\infty \E*{\prod_{i=1}^n e^{tX_i}}p_N(n)\\
+            &= 1 + \sum_{n=1}^\infty \E*{e^{tX}}^n p_N(n)
+              && \text{since the \(X_i\)'s are iid w.r.t. \(X\)}\\
+            &= \sum _{n=0}^\infty m_X(t)^n p_N(n)\\
+            &= \E*{m_X(t)^N} && \text{by the law of the unconscious statistician}\\
+            &= \E*{e^{\ln(m_X) \cdot N}}\\
+            &= m_N(\ln(m_X(t)))\\
+            &= \text{RHS} \qedhere
+          \end{align*}
+        \end{proof}
+      \end{solution}
+      \part{}
+      Let \(N\) have a Poisson\((\lambda)\) distribution and suppose \(N\) independent
+      Bernoulli trials are conducted, where the probability of success in each
+      trial is \(p\). Let \(Y\) denote the total number of successes in the
+      conducted trials. Compute the moment generating function of \(Y\) and use
+      this to determine the distribution of \(Y\).
+      \begin{solution}
+        Let \(X_i\) be the indicator function for the success of the \(i\)th experiment,
+        \(i \in \{1, \dotsc, N\}\), which implies that the \(X_i\)'s are iid to
+        \(X \sim \text{Bernoulli}(p)\). Then
+        \begin{equation*}
+          Y = \begin{cases}
+            \sum_{i=1}^N X_i & \text{if}\ N \in \integers_{\ge 1}\\
+            0, & \text{if}\ N = 0
+          \end{cases}
+        \end{equation*}
+        From the lecture material, we know that
+        \begin{equation*}
+          m_N(t) = e^{\lambda(e^t-1)}, \quad \forall t \in \reals
+        \end{equation*}
+        Computing the mgf of \(X\) gives us
+        \begin{align*}
+          m_X(t) &= \E*{e^{tX}}\\
+          &= \sum_{x=0}^1 e^{tx} p_X(x) && \text{where \(p_X\) is the pmf of \(X\)}\\
+          &= 1 - p + pe^t, \quad \forall t \in \reals
+        \end{align*}
+        By part~\ref{part:2a}, the mgf of \(Y\) is
+        \begin{align*}
+          m_Y(t) &= m_N(\ln(m_X(t)))\\
+          &= m_N(\ln(1 - p + pe^t))\\
+          &= e^{\lambda\left(e^{\ln(1 - p + pe^t)} - 1\right)}\\
+          &= e^{\lambda\left(1 - p + pe^t - 1\right)}\\
+          &= e^{(\lambda p)(e^t-1)}
+        \end{align*}
+        which is the mgf of a random variable with a Poisson\((\lambda p)\)
+        distribution. Thus, \(\boxed{Y \sim \text{Poisson}(\lambda p)}\).
+      \end{solution}
+    \end{parts}
+  \end{questions}
+\end{document}
