@@ -1,0 +1,61 @@
+\documentclass[%
+  hwnumber=8,%
+  studentnumber=20053722,%
+  {name=Bryan Hoang}%
+]{%
+  mthe353answer%
+}
+
+\begin{document}
+  \begin{questions}
+    \setcounter{question}{3}
+    \question{}
+    \begin{solution}
+      To convert the product into a sum for the CTL, let's take the natural
+      logarithm of both sides of the inequality. A transformation of random
+      variables will be necessary, and so let \(h(x) = \ln(x)\) and let \(Y_i = h(X_i)\),
+      for \(i \in \{1, \dotsc, 100\}\). Then \(g(y) = h^{-1}(y) = e^y\). With \(f_X(x)\)
+      as the common pdf of the \(X_i\)'s, it follows that the common pdf of each
+      \(Y_i\) is
+      \begin{align*}
+        f_Y(y) &= f_X(g(y))\abs{J_g(y)}\\
+        &= f_X(e^y) e^y\\
+        &= \frac{1}{e} 1_{\{y \le 1\}} e^y\\
+        &= e^{y-1} 1_{\{y \le 1\}}
+      \end{align*}
+      The common expectation, \(\mu\), of each \(Y_i\) is
+      \begin{align*}
+        \E{Y} &= \int_{-\infty}^{1} y f_Y(y) \dd{y}\\
+        &= \int_{-\infty}^{1} y e^{y-1} \dd{y}\\
+        &= \left.(y-1)e^{y-1}\right|_{y = -\infty}^{y = 1}\\
+        &= 0
+      \end{align*}
+      and the common second moment of each \(Y_i\) is
+      \begin{align*}
+        \E{Y^2} &= \int_{-\infty}^{1} y^2 e^{y-1} \dd{y}\\
+        &= \left.(y^2-2y+2)e^{y-1}\right|_{y=-\infty}^{y=1}\\
+        &= 1
+      \end{align*}
+      Thus the common variance, \(\sigma^2\), of each \(Y_i\) is
+      \begin{align*}
+        \Var{Y} &= \E{Y^2} - \E{Y}^2\\
+        &= 1
+      \end{align*}
+      Evaluating the probability yields
+      \begin{align*}
+        \prob*{\prod_{i=1}^{100} X_i \le c} &= \prob*{\ln(\prod_{i=1}^{100} X_i) \le \ln(c)}\\
+        &= \prob*{\sum_{i=1}^{100} Y_i \le \ln(c)}
+      \end{align*}
+      Let \(S_n = \sum_{i=1}^{100} Y_i\) and \(Z \sim \text{N}(0,1)\). Then by
+      the central limit theorem, we have that
+      \begin{align*}
+        \frac{S_n}{\sqrt{n}} &\xrightarrow{d} Z\\
+        \implies \frac{S_{100}}{10} &\dot{\sim} Z
+      \end{align*}
+      Hence, \(\prob*{\prod_{i=1}^{100} X_i \le c} = \prob{\frac{S_n}{10} \le \frac{1}{10}\ln(c)} = \frac{1}{2}\)
+      when \(\frac{1}{10}\ln(c) = 0\) by the symmetry of the normal distribution.
+
+      Therefore, \fbox{\(c = 1\)}.
+    \end{solution}
+  \end{questions}
+\end{document}

@@ -1,0 +1,85 @@
+\documentclass[%
+  hwnumber=8,%
+  studentnumber=20053722,%
+  {name=Bryan Hoang}%
+]{%
+  mthe353answer%
+}
+
+\begin{document}
+  \begin{questions}
+    \setcounter{question}{0}
+    \question{}
+    \begin{parts}
+      \part{}\label{part:a}
+      \begin{solution}
+        \begin{proof}
+          Let \(\varepsilon \in \reals_{> 0}\). Then
+          \begin{align*}
+            \prob{X > M + \varepsilon} &= \prob{X - X_n > M - X_n + \varepsilon}\\
+            &= \prob{X - X_n > M - X_n + \varepsilon | M - X_n \ge 0} \prob{M - X_n \ge 0}\\
+            &\inviseq  + \prob{X - X_n > M - X_n + \varepsilon | M - X_n < 0} \prob{M - X_n < 0}
+          \end{align*}
+          by the law of total probability. Then
+          \begin{equation*}
+            \prob{X > M + \varepsilon} = \prob{X - X_n > M - X_n + \varepsilon | M - X_n \ge 0}
+          \end{equation*}
+          since \(\prob{\abs{X_n} \le M = 1}\) by assumption. It follows that
+          \begin{align*}
+            \prob{X > M + \varepsilon} &\le \prob{X - X_n > \varepsilon}\\
+            &\le \prob{\abs{X - X_n} > \varepsilon} \to 0
+          \end{align*}
+          as \(n \to \infty\) since \(X_n \to X\) by assumption. Hence,
+          \(\prob{X>M+\varepsilon} = 0\ \forall \varepsilon \in \reals_{>0}\).
+          This implies that \(\prob{X>M}=0\), and so \(\prob{X \le M}=1\). A similar
+          argument can be used to show that \(\prob{-X < -M - \varepsilon} = 0\), and so
+          \(\prob{-X \ge M} = 1\).
+
+          Therefore, \(\prob{\abs{X} \le M} = 1\).
+        \end{proof}
+      \end{solution}
+      \part{}
+      \begin{solution}
+        \begin{proof}
+          Let \(r \in \integers_{>0}\) and let \(B=\{\omega : \abs{X(\omega)} \le M\}\).
+
+          If \(\omega \in A_n(\varepsilon)^c\), then \(\abs{X_n(\omega)-X(\omega)}\le \varepsilon
+          \implies \abs{X_n(\omega)-X(\omega)}^r \le \varepsilon^r\).
+
+          If \(\omega \in A_n(\varepsilon) \cap B\), then
+          \begin{align*}
+            \abs{X_n(\omega)-X(\omega)} &\le \abs{X_n(\omega)} + \abs{X(\omega)}
+              && \text{by the triangle inequality}\\
+            &\le 2M && \text{since \(\prob{X_n \le M} = 1\) and \(\omega \in B\)}\\
+            \implies \abs{X_n(\omega)-X(\omega)}^r &\le (2M)^r
+          \end{align*}
+          Hence, \(\abs{X_n-X}^r \le \varepsilon^r I_{A_n(\varepsilon)^c} +
+          (2M)^r I_{A_n(\varepsilon)}\ \forall \omega \in B\). Since by part~\ref{part:a},
+          \(\prob{(B) = 1}\), then
+          \begin{equation*}
+            \abs{X_n-X}^r \le \varepsilon^r I_{A_n(\varepsilon)^c} + (2M)^r I_{A_n(\varepsilon)}
+          \end{equation*}
+          with probability 1.
+
+          By taking the expectations of both sides, we get that
+          \begin{align*}
+            \E{\abs{X_n-X}^r} &\le \E{\varepsilon^r I_{A_n(\varepsilon)^c} + (2M)^r I_{A_n(\varepsilon)}}\\
+            &= \varepsilon^r \prob{A_n(\varepsilon)^c} + (2M)^r \prob{A_n(\varepsilon)}\\
+            &\le \varepsilon^r + (2M)^r \prob{A_n(\varepsilon)}
+          \end{align*}
+          \(\forall n \in \integers_{>0}\) because \(\prob{A_n(\varepsilon)^c} \le 1\). Since \(X_n \xrightarrow{p} X\)
+          by assumption, it follows that \(\limit{n}{\infty} \prob{A_n(\varepsilon)} = 0\).
+
+          We then have
+          \begin{equation*}
+            \limit{n}{\infty} \E{\abs{X_n-X}^r} \le \varepsilon^r
+          \end{equation*}
+          \(\forall \varepsilon \in \reals_{>0}\), which implies that
+          \(\limit{n}{\infty} \E{\abs{X_n-X}^r} = 0\).
+
+          Therefore, \(X_n \xrightarrow{r.m.} X\).
+        \end{proof}
+      \end{solution}
+    \end{parts}
+  \end{questions}
+\end{document}

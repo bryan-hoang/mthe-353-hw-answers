@@ -1,0 +1,77 @@
+\documentclass[%
+  hwnumber=8,%
+  studentnumber=20053722,%
+  {name=Bryan Hoang}%
+]{%
+  mthe353answer%
+}
+
+\begin{document}
+  \begin{questions}
+    \setcounter{question}{2}
+    \question{}\
+      \begin{parts}
+      \part{}\label{part:a}
+      \begin{solution}
+        \begin{proof}
+          Suppose that \(X_n \xrightarrow{a.s.} X\) and \(Y_n \xrightarrow{a.s.} Y\).
+          Then
+          \begin{align*}
+            &\inviseq \prob*{\left\{\omega \in \Omega : \limit{n}{\infty} (X_n+Y_n)(\omega) = (X+Y)(\omega)\right\}}\\
+            &= \prob*{\left\{\omega \in \Omega : \limit{n}{\infty} X_n(\omega) + Y_n(\omega) = X(\omega) + Y(\omega)\right\}}\\
+            &= \prob*{\left\{\omega \in \Omega : \limit{n}{\infty} X_n(\omega) + \limit{n}{\infty} Y_n(\omega) = X(\omega) + Y(\omega)\right\}}\\
+            &= \prob*{\left\{\omega \in \Omega : \limit{n}{\infty} X_n(\omega) = X(\omega)\ \text{and}\ \limit{n}{\infty} Y_n(\omega) = Y(\omega) \right\}}\\
+            &= 1
+          \end{align*}
+          since
+          \begin{equation*}
+            \prob*{\left\{\omega \in \Omega : \limit{n}{\infty} X_n(\omega) = X(\omega)\right\}} = 1
+          \end{equation*}
+          and
+          \begin{equation*}
+            \prob*{\left\{\omega \in \Omega : \limit{n}{\infty} Y_n(\omega) = Y(\omega)\right\}} = 1
+          \end{equation*}
+          Therefore, \(X_n+Y_n \xrightarrow{a.s.} X+Y\).
+        \end{proof}
+      \end{solution}
+      \part{}
+      \begin{solution}
+        \begin{proof}
+          We have
+          \begin{align*}
+            \frac{1}{n} \sum_{i=1}^n (X_i - \overline{X}_n)^2
+              &= \frac{1}{n} \sum_{i=1}^n \left(X_i^2 - 2X_i\overline{X}_n + \overline{X}_n^2\right)\\
+            &= \frac{1}{n}\sum_{i=1}^n X_i^2 - \frac{1}{n} \sum_{i=1}^n 2X_i\overline{X}_n + \frac{1}{n}\sum_{i=1}^n\overline{X}_n^2\\
+            &= \frac{1}{n}\sum_{i=1}^n (X_i^2) - 2\overline{X}_n^2 + \overline{X}_n^2\\
+            &= \frac{1}{n}\sum_{i=1}^n (X_i^2) - \overline{X}_n^2 \numberthis\label{eq:1}
+          \end{align*}
+          The first term is essentially a sample mean of the squared \(X_i\)'s.
+          For instance, define \(Y_i = X_i^2\) and let \(\overline{Y}_n\) be the
+          sample mean of the \(Y_i's\). Then since each \(Y_i\) are i.i.d. with
+          finite mean and variance (since that \(X_i\)'s are i.i.d. with finite
+          mean and variance), then by the strong law of large numbers, we have
+          that
+          \begin{equation*}
+            \frac{1}{n}\sum_{i=1}^n (X_i^2) = \overline{Y}_n \xrightarrow{a.s.} \E{Y_i} = \E{X_i^2}
+          \end{equation*}
+          But we also know that
+          \begin{align*}
+            \Var{X_i} &= \E{X_i^2} - \E{X_i}^2\\
+            \sigma^2 &= \E{X_i^2} - \mu^2\\
+            \implies \E{X_i^2} &= \sigma^2 + \mu^2
+          \end{align*}
+          Hence, \(\frac{1}{n}\sum_{i=1}^n (X_i^2) \xrightarrow{a.s.} \sigma^2 + \mu^2\).
+
+          For the second term in~\eqref{eq:1}, since \(\overline{X}_n \xrightarrow{a.s.} \mu\)
+          and \(f(x) = x^2\) is a continuous function, then it follows that
+          \(\overline{X}_n^2 \xrightarrow{a.s.} \mu^2\).
+
+          By part~\ref{part:a}, we have
+          that~\eqref{eq:1}~\(\xrightarrow{a.s.} \sigma^2 + \mu^2 - \mu^2 = \sigma^2\)
+
+          Therefore, \(\frac{1}{n} \sum_{i=1}^n (X_i - \overline{X}_n)^2 \xrightarrow{a.s.} \sigma^2\).
+        \end{proof}
+      \end{solution}
+      \end{parts}
+  \end{questions}
+\end{document}
